@@ -1,0 +1,349 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Design tokens — LIGHT.
+
+   White reads as more premium here than black did, and it is the right call for
+   this product: a CRM is a daytime work tool, the existing brand is already
+   light, and a white page lets the one accent (brand purple) actually land.
+
+   The page is not uniformly white, though. Two sections invert to near-black —
+   Workflow and the closing CTA — because a page with no tonal break reads flat
+   however good the type is. That contrast is where the "premium" comes from.
+--------------------------------------------------------------------------- */
+@theme {
+  /* Light ground */
+  --color-canvas: #ffffff;
+  --color-canvas-2: #faf9fc;
+  --color-surface: #ffffff;
+  --color-surface-2: #f6f4fa;
+  --color-hairline: #e9e5f1;
+  --color-hairline-strong: #ddd7ea;
+
+  /* Inverted sections */
+  --color-dark: #0d0a14;
+  --color-dark-2: #171026;
+  --color-dark-hairline: #2a2137;
+
+  /* Text on light */
+  --color-ink: #14101f;
+  --color-ink-muted: #565067;
+  --color-ink-faint: #8b8499;
+
+  /* Text on dark */
+  --color-chalk: #f7f5fb;
+  --color-chalk-muted: #a79fba;
+  --color-chalk-faint: #736a88;
+
+  /* Brand */
+  --color-brand: #7137b3;
+  --color-brand-lift: #9b5de5;
+  --color-brand-deep: #3f1d6b;
+  --color-brand-wash: #f4eefc;
+
+  /* Secondary accent — the green in the wordmark, carried through to the
+     "positive" states (ticks, live dots) so it reads as intentional. */
+  --color-accent: #0ea672;
+  --color-accent-soft: #e8f8f1;
+
+  --color-wa: #25d366;
+  --color-ig: #e1306c;
+
+  --font-display: var(--font-instrument), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 22px;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  /*
+   * Anchor landing position.
+   *
+   * Exactly the height of the fixed header and nothing more. This used to be
+   * 96px AND every section also carried `scroll-mt-24` — scroll-padding on the
+   * scrollport and scroll-margin on the target ADD UP, so anchors landed 192px
+   * high and the bottom of the previous section stayed on screen. One offset,
+   * in one place, is the fix.
+   */
+  scroll-padding-top: 76px;
+  background: var(--color-canvas);
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-brand) 22%, transparent);
+  color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities
+--------------------------------------------------------------------------- */
+
+@utility font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+@utility eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+@utility gradient-text {
+  background: linear-gradient(100deg, var(--color-brand) 0%, #b57bf0 55%, var(--color-brand) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* The same trick on a dark section, lifted so it does not go muddy. */
+@utility gradient-text-dark {
+  background: linear-gradient(100deg, #b98bf5 0%, #e6d5ff 55%, #b98bf5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/*
+ * The card.
+ *
+ * On white, depth has to come from a soft shadow rather than a lighter fill —
+ * there is nothing lighter than the page. Two shadows: a tight one that reads
+ * as an edge, and a wide diffuse one that lifts the card off the ground.
+ */
+@utility card-edge {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-card);
+  box-shadow:
+    0 1px 2px rgba(20, 16, 31, 0.04),
+    0 12px 32px -12px rgba(20, 16, 31, 0.08);
+}
+
+@utility card-edge-dark {
+  position: relative;
+  background: var(--color-dark-2);
+  border: 1px solid var(--color-dark-hairline);
+  border-radius: var(--radius-card);
+}
+
+@utility glow {
+  box-shadow:
+    0 1px 2px rgba(20, 16, 31, 0.05),
+    0 24px 70px -24px rgba(113, 55, 179, 0.35);
+}
+
+/* Grain, for the inverted sections only — on white it just looks like dirt. */
+@utility grain {
+  position: relative;
+}
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@utility rule-fade {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-hairline-strong) 15%,
+    var(--color-hairline-strong) 85%,
+    transparent
+  );
+}
+
+@utility rule-fade-dark {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-dark-hairline) 15%,
+    var(--color-dark-hairline) 85%,
+    transparent
+  );
+}
+
+/*
+ * Page gutter.
+ *
+ * 1480px rather than a more typical 1280: the card grids are three-up, so every
+ * pixel here is divided by three and a narrow container makes the screenshots
+ * inside those cards too small to read. At this width a feature card is ~450px
+ * and its screenshot is legible at a glance, which is the entire point of
+ * putting one there.
+ *
+ * Long-form text does NOT get wider with it — the headings, standfirsts and FAQ
+ * carry their own max-widths (max-w-2xl / 3xl), because a 1400px line length is
+ * unreadable no matter how much room is going spare.
+ */
+@utility shell {
+  width: 100%;
+  max-width: 1480px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .shell {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Fluid type scale.
+
+   clamp() everywhere, so headings grow with the viewport instead of jumping at
+   two breakpoints. The middle term is the one that matters — it is vw-based, so
+   a 1440px laptop and a 390px phone both get a heading in proportion to the
+   column it sits in.
+--------------------------------------------------------------------------- */
+@utility text-hero {
+  font-size: clamp(2.75rem, 6.2vw, 5.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+@utility text-section {
+  font-size: clamp(2.125rem, 4.2vw, 3.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+
+@utility text-lede {
+  font-size: clamp(1.0625rem, 1.35vw, 1.3125rem);
+  line-height: 1.6;
+}
+
+@utility text-body-lg {
+  font-size: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  line-height: 1.65;
+}
+
+/* ---------------------------------------------------------------------------
+   Keyframes
+--------------------------------------------------------------------------- */
+/*
+ * Marquee.
+ *
+ * The track holds the card list TWICE, so translating it exactly -50% lands the
+ * second copy precisely where the first started and the loop is invisible. Any
+ * other distance, or an odd number of copies, produces a visible jump — which is
+ * why the component duplicates rather than trying to be clever with counts.
+ */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee-left var(--marquee-duration, 60s) linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right var(--marquee-duration, 60s) linear infinite;
+}
+
+/* Hovering a rail stops it, so a card that caught someone's eye can be read.
+   Applied on the wrapper, so the pointer does not have to chase a moving edge. */
+.marquee-hold:hover .animate-marquee-left,
+.marquee-hold:hover .animate-marquee-right {
+  animation-play-state: paused;
+}
+
+/* Cards dissolve at both ends rather than being sliced by the viewport edge. */
+@utility marquee-mask {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 7%,
+    #000 93%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 7%,
+    #000 93%,
+    transparent 100%
+  );
+}
+
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2.4s ease-out infinite;
+}
