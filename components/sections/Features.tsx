@@ -89,7 +89,7 @@ const TINTS: Record<
  */
 export function Features() {
   return (
-    <section id="features" className="relative py-24 sm:py-32">
+    <section id="features" className="section-edge relative py-24 sm:py-32">
       <div className="shell">
         <SectionHeading
           eyebrow="Everything you need"

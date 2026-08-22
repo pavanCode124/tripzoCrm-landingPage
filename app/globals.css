@@ -181,14 +181,27 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/*
+ * Hairlines that fade toward both ends.
+ *
+ * The stops are not evenly spaced on purpose. A plain
+ * `transparent -> solid -> transparent` ramp spends most of its length almost
+ * invisible and reads as a smudge; holding the line near full strength across
+ * the middle third and falling away sharply after it gives a rule that looks
+ * deliberate at the centre and genuinely vanishes at the edges. The extra stops
+ * at 8% and 92% are what stop the tails ending abruptly.
+ */
 @utility rule-fade {
   height: 1px;
   background: linear-gradient(
     90deg,
-    transparent,
-    var(--color-hairline-strong) 15%,
-    var(--color-hairline-strong) 85%,
-    transparent
+    transparent 0%,
+    color-mix(in oklab, var(--color-hairline-strong) 18%, transparent) 8%,
+    color-mix(in oklab, var(--color-hairline-strong) 72%, transparent) 26%,
+    var(--color-hairline-strong) 50%,
+    color-mix(in oklab, var(--color-hairline-strong) 72%, transparent) 74%,
+    color-mix(in oklab, var(--color-hairline-strong) 18%, transparent) 92%,
+    transparent 100%
   );
 }
 
@@ -196,10 +209,77 @@ body {
   height: 1px;
   background: linear-gradient(
     90deg,
-    transparent,
-    var(--color-dark-hairline) 15%,
-    var(--color-dark-hairline) 85%,
-    transparent
+    transparent 0%,
+    color-mix(in oklab, var(--color-dark-hairline) 18%, transparent) 8%,
+    color-mix(in oklab, var(--color-dark-hairline) 72%, transparent) 26%,
+    var(--color-dark-hairline) 50%,
+    color-mix(in oklab, var(--color-dark-hairline) 72%, transparent) 74%,
+    color-mix(in oklab, var(--color-dark-hairline) 18%, transparent) 92%,
+    transparent 100%
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Section dividers.
+
+   A 1px rule across the top of a section, strongest at the centre and gone by
+   the edges. Drawn as a pseudo-element rather than `border-top` because a
+   border cannot hold a gradient, and rather than a spacer <div> because an
+   empty element between every section is markup that means nothing.
+
+   Two variants, and both are needed: the dark bands (Workflow, Automations)
+   would swallow an ink-coloured hairline entirely, so they take a white one.
+   The divider always sits on the section BELOW the boundary, so each section
+   only has to know its own background.
+
+   `inset-x` is pulled in to the page gutter so the line starts and ends with
+   the content rather than running off into the viewport edge.
+--------------------------------------------------------------------------- */
+@utility section-edge {
+  position: relative;
+}
+
+.section-edge::before,
+.section-edge-light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  /* `left` + `width` rather than `left` + `right`: the pair form left the used
+     width unresolved in testing, and an explicit width cannot be ambiguous. */
+  left: 5%;
+  width: 90%;
+  height: 1px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section-edge::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklab, var(--color-hairline-strong) 20%, transparent) 10%,
+    color-mix(in oklab, var(--color-hairline-strong) 85%, transparent) 30%,
+    var(--color-hairline-strong) 50%,
+    color-mix(in oklab, var(--color-hairline-strong) 85%, transparent) 70%,
+    color-mix(in oklab, var(--color-hairline-strong) 20%, transparent) 90%,
+    transparent 100%
+  );
+}
+
+@utility section-edge-light {
+  position: relative;
+}
+
+.section-edge-light::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 10%,
+    rgba(255, 255, 255, 0.16) 30%,
+    rgba(255, 255, 255, 0.24) 50%,
+    rgba(255, 255, 255, 0.16) 70%,
+    rgba(255, 255, 255, 0.04) 90%,
+    transparent 100%
   );
 }
 

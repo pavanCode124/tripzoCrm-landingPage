@@ -18,7 +18,7 @@ import { ABOUT, APP_URL } from '@/lib/content';
  */
 export function About() {
   return (
-    <section id="about" className="relative overflow-hidden py-24 sm:py-32">
+    <section id="about" className="section-edge relative overflow-hidden py-24 sm:py-32">
       {/*
        * A heavier scrim than the hero gets, and measured the same way: the
        * water this copy sits on is luma 161 against the hero's 189, so it needs

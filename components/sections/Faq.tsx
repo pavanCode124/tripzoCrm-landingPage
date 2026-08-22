@@ -23,7 +23,7 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="relative py-24 sm:py-32">
+    <section className="section-edge relative py-24 sm:py-32">
       <div className="shell">
         <SectionHeading eyebrow="Questions" title="The things agencies" accent="always ask." />
 

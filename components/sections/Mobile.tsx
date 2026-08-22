@@ -21,7 +21,7 @@ import { MOBILE } from '@/lib/content';
  */
 export function Mobile() {
   return (
-    <section id="mobile" className="relative overflow-hidden bg-canvas-2/60 py-24 sm:py-32">
+    <section id="mobile" className="section-edge relative overflow-hidden bg-canvas-2/60 py-24 sm:py-32">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute top-1/2 -left-40 size-[620px] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(155,93,229,0.12),transparent_65%)] blur-2xl"

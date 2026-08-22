@@ -17,7 +17,7 @@ import { APP_URL, PRICING } from '@/lib/content';
  */
 export function Pricing() {
   return (
-    <section id="pricing" className="relative bg-canvas-2/60 py-24 sm:py-32">
+    <section id="pricing" className="section-edge relative bg-canvas-2/60 py-24 sm:py-32">
       <div className="shell">
         <SectionHeading
           eyebrow={PRICING.eyebrow}

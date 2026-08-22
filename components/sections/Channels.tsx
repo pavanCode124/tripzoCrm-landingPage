@@ -41,7 +41,7 @@ const LOOKS: Record<
 
 export function Channels() {
   return (
-    <section id="channels" className="relative bg-canvas-2/60 py-24 sm:py-32">
+    <section id="channels" className="section-edge relative bg-canvas-2/60 py-24 sm:py-32">
       <div className="shell relative">
         <SectionHeading
           eyebrow="Launch on every channel"

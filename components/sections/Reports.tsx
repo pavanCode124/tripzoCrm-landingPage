@@ -29,7 +29,7 @@ const AGENTS = [
 
 export function Reports() {
   return (
-    <section className="relative py-24 sm:py-32">
+    <section className="section-edge relative py-24 sm:py-32">
       <div className="shell">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <div>

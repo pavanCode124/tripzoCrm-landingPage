@@ -18,7 +18,7 @@ import { SHOWCASE } from '@/lib/content';
  */
 export function Showcase() {
   return (
-    <section id="platform" className="relative overflow-hidden py-24 sm:py-32">
+    <section id="platform" className="section-edge relative overflow-hidden py-24 sm:py-32">
       <div className="shell">
         <SectionHeading
           eyebrow={SHOWCASE.eyebrow}

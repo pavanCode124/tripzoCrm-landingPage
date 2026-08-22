@@ -29,7 +29,7 @@ import { APP_URL, AUTOMATIONS } from '@/lib/content';
  */
 export function Automations() {
   return (
-    <section id="automations" className="grain relative overflow-hidden bg-dark py-24 sm:py-32">
+    <section id="automations" className="section-edge-light grain relative overflow-hidden bg-dark py-24 sm:py-32">
       <Decor />
 
       <div className="relative">

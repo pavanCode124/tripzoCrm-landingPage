@@ -14,7 +14,7 @@ import { APP_URL, FINAL_CTA } from '@/lib/content';
  */
 export function FinalCta() {
   return (
-    <section className="relative px-6 pb-24 sm:pb-32">
+    <section className="section-edge relative px-6 pt-24 pb-24 sm:pt-32 sm:pb-32">
       <div className="mx-auto max-w-[1480px]">
         <div className="grain relative overflow-hidden rounded-[16px] bg-gradient-to-br from-brand-deep via-brand to-brand-lift px-6 py-20 text-center sm:px-12 sm:py-28">
           <div

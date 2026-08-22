@@ -18,7 +18,7 @@ import { WORKFLOW } from '@/lib/content';
  */
 export function Workflow() {
   return (
-    <section id="workflow" className="grain relative overflow-hidden bg-dark py-24 sm:py-32">
+    <section id="workflow" className="section-edge-light grain relative overflow-hidden bg-dark py-24 sm:py-32">
       {/* Two blooms, kept low-opacity: on near-black these carry the depth that
           a shadow would carry on white. */}
       <div
