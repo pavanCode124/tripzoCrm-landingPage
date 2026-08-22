@@ -1,37 +1,41 @@
 /**
- * A photograph behind a section, treated so text stays readable on top of it.
+ * A photograph behind a section.
  *
- * Dropping a photo straight behind near-black copy is the fastest way to make a
- * page look amateur — the text fights the image and both lose. Four layers fix
- * that, and all four are needed:
+ * FIRST ATTEMPT WAS WRONG, and the fix is worth recording. The original put a
+ * heavy flat white wash over the whole frame plus a blur, which did guarantee
+ * text contrast — and left the photo a pale grey smear nobody could make out.
+ * Washing the entire image to protect text that occupies a third of it trades
+ * the whole picture for a problem that only exists in the middle.
  *
- *   1. THE IMAGE, desaturated and very slightly blurred. It becomes atmosphere
- *      rather than a picture demanding to be looked at. The blur also hides that
- *      Home_background.png is only 768px wide and is being upscaled past 1480.
- *   2. A WHITE WASH, heavy enough that body copy clears AA contrast. Tunable per
- *      section via `wash`, because a bright sky needs more than a dusk skyline.
- *   3. A VIGNETTE — brightest in the middle, where the words are.
- *   4. AN EDGE FADE to solid canvas top and bottom, so the section dissolves
- *      into the page instead of ending on a hard horizontal seam. This is the
- *      layer people skip, and its absence is what makes a photo section look
- *      pasted in.
+ * So the scrim is now LOCAL, not global:
  *
- * `position` matters: why_tripzo.png has "TIME TO TRAVEL" baked into the lower
- * third, which would sit under our own heading. Cropping to the upper part of
- * the frame avoids showing two headlines at once.
+ *   1. The image runs near full strength — no blur, barely any desaturation.
+ *      It should look like a photograph, because that is the point of it.
+ *   2. A soft white ELLIPSE sits behind the text column only. Opaque at the
+ *      centre where the words are, gone by the edges, so the mountains and sky
+ *      stay vivid in the corners.
+ *   3. A light overall veil takes the edge off contrast without flattening it.
+ *   4. Edge fades top and bottom dissolve the section into the page, so it does
+ *      not end on a hard horizontal seam.
+ *
+ * `position` matters: why_tripzo.png has "TIME TO TRAVEL" baked into its lower
+ * third, which would sit under our own heading. Cropping high avoids showing
+ * two headlines at once.
  */
 export function PhotoBackdrop({
   src,
   position = 'center',
-  wash = 0.82,
+  /** The soft ellipse behind the copy. Raise it if a section's text sits on a
+      busy part of the photograph. */
+  spotlight = 0.9,
+  /** Light overall veil. Keep low — this is the knob that killed the picture. */
+  veil = 0.22,
   scale = 1,
 }: {
   src: string;
-  /** object-position for the crop. */
   position?: string;
-  /** 0–1. How much white sits over the photo. Higher = quieter image. */
-  wash?: number;
-  /** Zoom, for pushing a small source past its natural size deliberately. */
+  spotlight?: number;
+  veil?: number;
   scale?: number;
 }) {
   return (
@@ -43,19 +47,24 @@ export function PhotoBackdrop({
         style={{
           objectPosition: position,
           transform: scale === 1 ? undefined : `scale(${scale})`,
-          filter: 'saturate(0.72) blur(1.5px)',
+          filter: 'saturate(1.02) contrast(1.02)',
         }}
       />
 
-      {/* White wash */}
-      <div className="absolute inset-0" style={{ backgroundColor: `rgba(255,255,255,${wash})` }} />
+      {/* Light overall veil */}
+      <div className="absolute inset-0" style={{ backgroundColor: `rgba(255,255,255,${veil})` }} />
 
-      {/* Vignette — clearest where the copy sits */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_55%_at_50%_45%,rgba(255,255,255,0.55),transparent_75%)]" />
+      {/* The local scrim — this is what makes the text readable, not the veil. */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(ellipse 58% 48% at 50% 42%, rgba(255,255,255,${spotlight}) 0%, rgba(255,255,255,${spotlight * 0.82}) 42%, rgba(255,255,255,0) 78%)`,
+        }}
+      />
 
-      {/* Dissolve into the page at both edges */}
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-canvas to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-canvas via-canvas/70 to-transparent" />
+      {/* Dissolve into the page */}
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-canvas via-canvas/80 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-canvas via-canvas/85 to-transparent" />
     </div>
   );
 }

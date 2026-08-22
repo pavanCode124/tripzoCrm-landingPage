@@ -26,8 +26,8 @@ const SIZES = {
 } as const;
 
 const VARIANTS: Record<Variant, string> = {
-  // Flat brand fill. No gradient — a gradient on a rectangle reads as a bevel.
-  primary: 'bg-brand text-white hover:bg-brand-deep',
+  // The one surface on the page with depth. See `btn-glass` in globals.css.
+  primary: 'btn-glass text-white',
   secondary: 'border border-hairline-strong bg-canvas text-ink hover:bg-surface-2',
   dark: 'bg-ink text-white hover:bg-dark-2',
   onDark: 'bg-white text-ink hover:bg-brand-wash',

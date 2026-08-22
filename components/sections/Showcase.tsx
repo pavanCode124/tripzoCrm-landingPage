@@ -28,7 +28,9 @@ export function Showcase() {
         />
 
         <Reveal delay={0.12} y={34}>
-          <div className="relative mt-16">
+          {/* Narrower than the page gutter: at full width the mesh behind it
+              became the loudest thing on the page, which is backwards. */}
+          <div className="relative mx-auto mt-16 max-w-5xl">
             {/* Blurred colour mesh */}
             <div
               aria-hidden="true"
@@ -43,7 +45,7 @@ export function Showcase() {
             </div>
 
             {/* The window. Padded on three sides, open at the bottom. */}
-            <div className="relative px-4 pt-10 sm:px-10 sm:pt-16 lg:px-20 lg:pt-20">
+            <div className="relative px-4 pt-8 sm:px-8 sm:pt-12 lg:px-14 lg:pt-14">
               <div className="overflow-hidden rounded-t-[12px] border border-white/25 bg-canvas shadow-[0_20px_50px_-24px_rgba(10,8,20,0.5)]">
                 <div className="flex items-center gap-2 border-b border-hairline bg-surface-2 px-4 py-3">
                   <span className="size-3 rounded-full bg-[#ff5f57]" />

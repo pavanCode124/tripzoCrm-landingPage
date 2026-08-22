@@ -1,23 +1,28 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Instrument_Serif } from 'next/font/google';
+import { Instrument_Serif, Plus_Jakarta_Sans } from 'next/font/google';
 
 import './globals.css';
 
 /**
  * Two faces, doing two jobs.
  *
- * Instrument Serif carries headlines only — it is the single strongest signal
- * that this is not a stock template, and it is what the reference site uses to
- * the same end. Inter does everything else, because a serif at 15px in a
- * feature card is unreadable.
+ * Plus Jakarta Sans replaced Inter for the UI. Inter is the default of every
+ * SaaS template on the internet, which is exactly the problem — it is
+ * competent and completely anonymous. Jakarta is geometric with a taller
+ * x-height and genuinely distinctive letterforms (the single-storey 'a' at
+ * weight 800, the flat-sided 'o'), so headings set in it look designed rather
+ * than typed. Its numerals are also better proportioned, which matters on a
+ * page whose loudest elements are "10x" and "24/7".
+ *
+ * Instrument Serif still carries the italic display accents and nothing else.
  *
  * Both are self-hosted by next/font at build time: no render-blocking request
  * to Google, no layout shift, and `display: swap` so text paints immediately.
  */
-const inter = Inter({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-sans-custom',
 });
 
 const instrumentSerif = Instrument_Serif({
@@ -72,7 +77,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${instrumentSerif.variable}`}>
+    <html lang="en" className={`${jakarta.variable} ${instrumentSerif.variable}`}>
       <body>{children}</body>
     </html>
   );

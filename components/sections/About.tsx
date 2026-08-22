@@ -25,7 +25,7 @@ export function About() {
        * headlines on the same screen. The planes and skyline carry the idea on
        * their own.
        */}
-      <PhotoBackdrop src="/shots/why_tripzo.png" position="center 18%" wash={0.86} />
+      <PhotoBackdrop src="/shots/why_tripzo.png" position="center 14%" spotlight={0.9} veil={0.2} />
 
       <div className="shell relative z-10">
         <SectionHeading

@@ -23,12 +23,12 @@ import { FEATURES } from '@/lib/content';
  * Instagram come from components/ui/BrandIcons.
  */
 const ICONS: Record<string, ReactNode> = {
-  leads: <UsersIcon className="size-[22px]" />,
-  whatsapp: <WhatsAppIcon size={22} />,
-  instagram: <InstagramIcon size={22} />,
-  map: <MapIcon className="size-[22px]" />,
-  bookings: <CalendarDaysIcon className="size-[22px]" />,
-  hotel: <BuildingOffice2Icon className="size-[22px]" />,
+  leads: <UsersIcon className="size-[19px]" />,
+  whatsapp: <WhatsAppIcon size={19} />,
+  instagram: <InstagramIcon size={19} />,
+  map: <MapIcon className="size-[19px]" />,
+  bookings: <CalendarDaysIcon className="size-[19px]" />,
+  hotel: <BuildingOffice2Icon className="size-[19px]" />,
 };
 
 /**
@@ -98,26 +98,33 @@ export function Features() {
           sub="Designed end to end for travel agencies — from the first unread message to the final settled invoice, with the workflows your team already uses."
         />
 
-        <RevealGroup className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {/*
+         * The grid sits inside a glass panel rather than floating on the page.
+         * Six white cards on a white ground have nothing to belong to — the
+         * container gives them an edge to sit within, and the faint tint behind
+         * separates card from page without adding another border weight.
+         */}
+        <div className="mt-16 rounded-[18px] border border-hairline bg-white/50 p-4 shadow-[0_1px_2px_rgba(20,16,31,0.04)] backdrop-blur-xl backdrop-saturate-150 sm:p-6">
+          <RevealGroup className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((feature) => {
             const tint = TINTS[feature.tint] ?? TINTS.blue;
 
             return (
               <RevealItem key={feature.title}>
                 <article
-                  className={`card-edge mx-auto flex h-full w-full max-w-[560px] flex-col p-6 transition-colors duration-200 md:max-w-none ${tint.hover}`}>
+                  className={`card-edge mx-auto flex h-full w-full max-w-[520px] flex-col p-5 transition-colors duration-200 md:max-w-none ${tint.hover}`}>
                   <span
-                    className={`grid size-12 place-items-center rounded-[10px] text-white ${tint.chip}`}>
+                    className={`grid size-10 place-items-center rounded-[8px] text-white ${tint.chip}`}>
                     {ICONS[feature.icon] ?? ICONS.leads}
                   </span>
 
-                  <h3 className="mt-5 text-[1.25rem] font-bold tracking-tight text-ink">
+                  <h3 className="mt-4 text-[1.0625rem] font-bold tracking-tight text-ink">
                     {feature.title}
                   </h3>
 
                   {/* The tile. Overflow hidden so the shot's corners stay
                       clipped by the tile radius while it scales on hover. */}
-                  <div className={`mt-5 overflow-hidden rounded-[10px] p-4 sm:p-5 ${tint.tile}`}>
+                  <div className={`mt-4 overflow-hidden rounded-[8px] p-3 ${tint.tile}`}>
                     <Shot
                       src={feature.shot}
                       alt={feature.alt}
@@ -128,12 +135,13 @@ export function Features() {
                     />
                   </div>
 
-                  <p className="text-body-lg mt-5 text-ink-muted text-pretty">{feature.body}</p>
+                  <p className="mt-4 text-[0.875rem] leading-relaxed text-ink-muted text-pretty">{feature.body}</p>
                 </article>
               </RevealItem>
             );
           })}
-        </RevealGroup>
+          </RevealGroup>
+        </div>
       </div>
     </section>
   );

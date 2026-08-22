@@ -76,10 +76,10 @@ export function Nav() {
             className="text-[0.8125rem] font-semibold tracking-[0.03em] text-ink uppercase transition-colors hover:text-brand xl:text-[0.9375rem]">
             Sign in
           </Link>
-          {/* Flat brand fill, no icon, no lift. Hover darkens and nothing else. */}
+          {/* The page's one glassy surface — see `btn-glass` in globals.css. */}
           <Link
             href={`${APP_URL}/login`}
-            className="inline-flex h-11 items-center rounded-[10px] bg-brand px-5 text-[0.8125rem] font-bold tracking-[0.04em] text-white uppercase transition-colors duration-200 hover:bg-brand-deep xl:px-6 xl:text-[0.875rem]">
+            className="btn-glass inline-flex h-11 items-center rounded-[10px] px-5 text-[0.8125rem] font-bold tracking-[0.04em] text-white uppercase xl:px-6 xl:text-[0.875rem]">
             Start free
           </Link>
         </div>
@@ -120,7 +120,7 @@ export function Nav() {
                 </Link>
                 <Link
                   href={`${APP_URL}/login`}
-                  className="inline-flex items-center justify-center rounded-[10px] bg-brand px-6 py-3.5 text-base font-bold tracking-wide text-white uppercase transition-colors duration-200 hover:bg-brand-deep">
+                  className="btn-glass inline-flex items-center justify-center rounded-[10px] px-6 py-3.5 text-base font-bold tracking-wide text-white uppercase">
                   Start free
                 </Link>
               </div>

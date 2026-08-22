@@ -11,7 +11,6 @@ import { Nav } from '@/components/sections/Nav';
 import { Pricing } from '@/components/sections/Pricing';
 import { Reports } from '@/components/sections/Reports';
 import { Showcase } from '@/components/sections/Showcase';
-import { Stats } from '@/components/sections/Stats';
 import { Workflow } from '@/components/sections/Workflow';
 
 /**
@@ -20,7 +19,6 @@ import { Workflow } from '@/components/sections/Workflow';
  * Order is an argument, not a menu:
  *
  *   Hero        what this is, and the product on screen immediately
- *   Stats       the headline figures
  *   Showcase    the whole admin panel, once, full width
  *   Features    what you get — each card carrying its own screenshot
  *   Channels    where the leads come from — the reader's actual problem
@@ -44,7 +42,6 @@ export default function HomePage() {
       <Nav />
       <main>
         <Hero />
-        <Stats />
         <Showcase />
         <Features />
         <Channels />

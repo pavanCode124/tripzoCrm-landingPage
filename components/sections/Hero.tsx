@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { AppMock } from '@/components/sections/AppMock';
 import { Button } from '@/components/ui/Button';
 import { PhotoBackdrop } from '@/components/ui/PhotoBackdrop';
+import { HeroStats } from '@/components/sections/Stats';
 import { ArrowRightIcon, CheckIcon } from '@/components/ui/icons';
 import { APP_URL, HERO } from '@/lib/content';
 
@@ -35,11 +36,9 @@ const item = {
 export function Hero() {
   return (
     <section className="relative overflow-hidden pt-[150px] pb-20 sm:pt-[176px] md:pb-28">
-      {/* The photograph. `scale` pushes a 768px-wide source past the container
-          width on purpose — combined with the blur it reads as depth of field
-          rather than as an upscaled image. */}
-      <PhotoBackdrop src="/shots/Home_background.png" position="center 38%" wash={0.84} scale={1.08} />
-      <GridOverlay />
+      {/* The photograph. A small `scale` hides the softest edge of a 768px-wide
+          source being stretched to full width. */}
+      <PhotoBackdrop src="/shots/Home_background.png" position="center 30%" spotlight={0.92} veil={0.18} scale={1.04} />
 
       <motion.div
         className="shell relative z-10"
@@ -86,33 +85,18 @@ export function Hero() {
             hidden: { opacity: 0, y: 44 },
             show: { opacity: 1, y: 0, transition: { duration: 1, ease: EASE, delay: 0.2 } },
           }}
-          className="mt-18 sm:mt-24">
+          className="mt-16 sm:mt-20">
           <AppMock />
+        </motion.div>
+
+        {/* The figures close the hero rather than starting a new section. They
+            are the proof for the claim directly above them, so a section break
+            between the two was separating an argument from its evidence. */}
+        <motion.div variants={item} className="mt-20 sm:mt-24">
+          <HeroStats />
         </motion.div>
       </motion.div>
     </section>
   );
 }
 
-/**
- * Faint grid over the photograph.
- *
- * Keeps the section related to the rest of the page, which is a white product
- * page rather than a travel brochure — without it the hero reads as a different
- * site to everything below it.
- */
-function GridOverlay() {
-  return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 top-0 h-[860px] opacity-40"
-      style={{
-        backgroundImage:
-          'linear-gradient(to right, #d9d2ea 1px, transparent 1px), linear-gradient(to bottom, #d9d2ea 1px, transparent 1px)',
-        backgroundSize: '72px 72px',
-        maskImage: 'radial-gradient(ellipse 72% 52% at 50% 26%, #000 30%, transparent 100%)',
-        WebkitMaskImage: 'radial-gradient(ellipse 72% 52% at 50% 26%, #000 30%, transparent 100%)',
-      }}
-    />
-  );
-}

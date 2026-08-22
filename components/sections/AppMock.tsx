@@ -24,10 +24,10 @@ import {
  */
 export function AppMock() {
   return (
-    <div className="relative mx-auto max-w-7xl">
+    <div className="relative mx-auto max-w-6xl">
       <div
         aria-hidden="true"
-        className="absolute -inset-x-10 -top-10 -bottom-12 rounded-[42px] bg-[radial-gradient(ellipse_at_50%_0%,rgba(155,93,229,0.18),transparent_62%)] blur-2xl"
+        className="absolute -inset-x-6 -top-6 -bottom-8 rounded-[28px] bg-[radial-gradient(ellipse_at_50%_0%,rgba(155,93,229,0.14),transparent_62%)] blur-2xl"
       />
 
       <div className="relative overflow-hidden rounded-[14px] border border-hairline bg-canvas shadow-[0_2px_10px_-4px_rgba(20,16,31,0.18)]">
@@ -40,7 +40,6 @@ export function AppMock() {
         </div>
       </div>
 
-      <FloatingCards />
     </div>
   );
 }
@@ -222,43 +221,3 @@ function Typing() {
   );
 }
 
-/**
- * Two cards escaping the frame. The overlap is the trick — a rectangle that
- * breaks its own container reads as depth, and it is what stops the hero
- * looking like a screenshot dropped into a box.
- */
-function FloatingCards() {
-  return (
-    <>
-      <motion.div
-        initial={{ opacity: 0, x: -18, y: 10 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ delay: 1.1, duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
-        className="animate-float-slow absolute -bottom-8 -left-2 hidden items-center gap-3.5 rounded-[10px] border border-hairline bg-canvas px-5 py-4 shadow-[0_4px_14px_-6px_rgba(20,16,31,0.2)] sm:flex md:-left-8">
-        <span className="relative grid size-10 place-items-center rounded-[8px] bg-ig/10">
-          <InstagramIcon size={18} className="text-ig" />
-          <span className="animate-pulse-ring absolute inset-0 rounded-[8px] ring-2 ring-ig/40" />
-        </span>
-        <div>
-          <p className="text-[0.875rem] font-semibold text-ink">New Instagram lead</p>
-          <p className="text-[0.75rem] text-ink-faint">Auto-assigned to Priya · just now</p>
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, x: 18, y: 10 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ delay: 1.35, duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
-        className="animate-float-slow absolute -top-7 -right-2 hidden items-center gap-3.5 rounded-[10px] border border-hairline bg-canvas px-5 py-4 shadow-[0_4px_14px_-6px_rgba(20,16,31,0.2)] md:-right-8 lg:flex"
-        style={{ animationDelay: '1.5s' }}>
-        <span className="grid size-10 place-items-center rounded-[8px] bg-accent-soft text-accent">
-          <CheckCircleIcon className="size-[18px]" />
-        </span>
-        <div>
-          <p className="text-[0.875rem] font-semibold text-ink">Payment received</p>
-          <p className="text-[0.75rem] text-ink-faint">₹1,29,000 · Maldives 4N5D</p>
-        </div>
-      </motion.div>
-    </>
-  );
-}
