@@ -48,7 +48,7 @@ export function Hero() {
        */}
       <PhotoBackdrop
         src="/shots/Home_background.png"
-        position="center 46%"
+        position="center 36%"
         spotlight={0.40}
         veil={0.05}
       />
@@ -78,14 +78,24 @@ export function Hero() {
           </Button>
         </motion.div>
 
+        {/*
+         * Each item carries its own glass chip.
+         *
+         * This row sits lower than the rest of the copy, across the sunlit
+         * ridge AND the dark mountain silhouette in front of it. No single text
+         * colour can win against both at once — dark text vanished into the
+         * silhouette, light text would vanish into the sun. Giving each item a
+         * surface of its own removes the dependency on what is behind it, which
+         * is the only fix that holds wherever the photo is later re-cropped.
+         */}
         <motion.ul
           variants={item}
-          className="mt-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 lg:mt-7">
+          className="mt-6 flex flex-wrap items-center justify-center gap-2.5 lg:mt-7">
           {HERO.assurances.map((line) => (
             <li
               key={line}
-              className="flex items-center gap-2 text-[0.875rem] font-semibold text-ink-photo">
-              <CheckIcon className="size-4 text-accent" />
+              className="flex items-center gap-2 rounded-[8px] border border-white/70 bg-white/70 px-3.5 py-2 text-[0.8125rem] font-semibold text-ink shadow-[0_1px_2px_rgba(20,16,31,0.06)] backdrop-blur-md backdrop-saturate-150">
+              <CheckIcon className="size-4 shrink-0 text-accent" />
               {line}
             </li>
           ))}

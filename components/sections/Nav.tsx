@@ -40,18 +40,26 @@ export function Nav() {
 
   return (
     /*
-     * Solid bar, lightly frosted.
+     * Frozen glass.
      *
-     * Mostly opaque white rather than heavy glass: the hero behind it is now a
-     * photograph, and a very translucent bar over a busy image makes the
-     * wordmark hard to read. Enough blur and saturation remain that the picture
-     * is felt through it without competing.
+     * Four things together, and it stops reading as glass if any is missing:
+     *   - real translucency (48% at rest) so the sunset genuinely shows through;
+     *   - a heavy 26px backdrop blur — this is the frost itself;
+     *   - backdrop-saturate at 190%, the step most people skip. Blur alone
+     *     drains the colour out of what is behind it and the bar goes grey and
+     *     dead; pushing saturation back up is what keeps the sky reading as a
+     *     sky through the panel;
+     *   - an inset white highlight along the top edge, because real frosted
+     *     glass catches light on its lip and a flat translucent panel does not.
+     *
+     * It firms up to 72% on scroll, where the content behind it is page rather
+     * than photograph and legibility matters more than the effect.
      */
     <header
-      className={`fixed inset-x-0 top-0 z-50 backdrop-blur-xl backdrop-saturate-[160%] transition-colors duration-200 ${
+      className={`fixed inset-x-0 top-0 z-50 backdrop-blur-[26px] backdrop-saturate-[190%] transition-colors duration-200 ${
         scrolled
-          ? 'border-b border-hairline bg-white/92'
-          : 'border-b border-white/40 bg-white/75'
+          ? 'border-b border-white/60 bg-white/72 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_0_rgba(20,16,31,0.06)]'
+          : 'border-b border-white/45 bg-white/48 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)]'
       }`}>
       <nav className="shell relative flex h-[76px] items-center justify-between" aria-label="Main">
         <Link href="/" aria-label="TripzoCRM home">
