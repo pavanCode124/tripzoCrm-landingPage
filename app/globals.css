@@ -29,6 +29,10 @@
   --color-ink: #14101f;
   --color-ink-muted: #565067;
   --color-ink-faint: #8b8499;
+  /* Body copy sitting ON a photograph. Darker than ink-muted because the ground
+     under it is a sunset, not white — measured at 4.42:1 with ink-muted, which
+     is under AA; this lands it at ~6.3:1 without washing the photo out further. */
+  --color-ink-photo: #35304a;
 
   /* Text on dark */
   --color-chalk: #f7f5fb;
@@ -420,4 +424,27 @@ body {
     inset 0 -1px 0 rgba(0, 0, 0, 0.16),
     0 1px 2px rgba(20, 16, 31, 0.2),
     0 12px 28px -12px rgba(113, 55, 179, 0.65);
+}
+
+
+/* ---------------------------------------------------------------------------
+   Short-viewport type scale.
+
+   The hero is one screen by contract, and the constraint that actually binds is
+   HEIGHT, not width. A 1366x768 laptop — still one of the most common screens
+   in use — leaves about 660px under the header, and the desktop scale overruns
+   it by a little. A width breakpoint cannot see this: 1366px wide is a large
+   screen by every horizontal measure.
+
+   So this keys off `max-height` instead, and only shrinks the two elements that
+   dominate the vertical budget. A 27-inch monitor at the same width is
+   untouched.
+--------------------------------------------------------------------------- */
+@media (max-height: 820px) {
+  .text-hero {
+    font-size: clamp(2.25rem, 4.6vw, 3.75rem);
+  }
+  .text-lede {
+    font-size: clamp(1rem, 1.15vw, 1.125rem);
+  }
 }

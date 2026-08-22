@@ -19,6 +19,7 @@ export function SectionHeading({
   sub,
   align = 'center',
   tone = 'light',
+  onPhoto = false,
 }: {
   eyebrow?: string;
   title: string;
@@ -26,6 +27,8 @@ export function SectionHeading({
   sub?: string;
   align?: 'center' | 'left';
   tone?: 'light' | 'dark';
+  /** Sitting over a photograph — uses the darker copy colour. */
+  onPhoto?: boolean;
 }) {
   const centered = align === 'center';
   const onDark = tone === 'dark';
@@ -56,7 +59,7 @@ export function SectionHeading({
       {sub ? (
         <Reveal delay={0.12}>
           <p
-            className={`text-lede mt-5 text-pretty ${onDark ? 'text-chalk-muted' : 'text-ink-muted'} ${
+            className={`text-lede mt-5 text-pretty ${onDark ? 'text-chalk-muted' : onPhoto ? 'text-ink-photo' : 'text-ink-muted'} ${
               centered ? 'mx-auto max-w-2xl' : ''
             }`}>
             {sub}

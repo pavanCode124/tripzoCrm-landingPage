@@ -20,13 +20,12 @@ export function About() {
   return (
     <section id="about" className="relative overflow-hidden py-24 sm:py-32">
       {/*
-       * Cropped to the middle band — 28%-56% of the source — which is exactly
-       * where the aeroplane sits. Above that is only rooftops; below it is the
-       * "TIME TO TRAVEL" lettering baked into the photograph, which would put
-       * two competing headlines on one screen. This band has the subject and
-       * neither problem.
+       * A heavier scrim than the hero gets, and measured the same way: the
+       * water this copy sits on is luma 161 against the hero's 189, so it needs
+       * roughly half again as much wash to bring body text over 4.5:1. Still
+       * light enough that the reef and the diver stay saturated.
        */}
-      <PhotoBackdrop src="/shots/why_tripzo.png" position="center 42%" spotlight={0.5} veil={0.06} />
+      <PhotoBackdrop src="/shots/why_tripzo.png" position="center 40%" spotlight={0.54} veil={0.08} />
 
       <div className="shell relative z-10">
         <SectionHeading
@@ -34,6 +33,7 @@ export function About() {
           title={ABOUT.title}
           accent={ABOUT.accent}
           sub={ABOUT.body}
+          onPhoto
         />
 
         <RevealGroup className="mt-16 grid gap-6 lg:grid-cols-3">
