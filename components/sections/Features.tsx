@@ -1,9 +1,15 @@
 'use client';
 
-import { BedDouble, CalendarCheck, Map, Users } from 'lucide-react';
 import type { ReactNode } from 'react';
 
-import { InstagramIcon, WhatsAppIcon } from '@/components/ui/BrandIcons';
+import {
+  BuildingOffice2Icon,
+  CalendarDaysIcon,
+  InstagramIcon,
+  MapIcon,
+  UsersIcon,
+  WhatsAppIcon,
+} from '@/components/ui/icons';
 import { RevealGroup, RevealItem } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Shot } from '@/components/ui/Shot';
@@ -17,12 +23,12 @@ import { FEATURES } from '@/lib/content';
  * Instagram come from components/ui/BrandIcons.
  */
 const ICONS: Record<string, ReactNode> = {
-  leads: <Users size={22} strokeWidth={2} />,
+  leads: <UsersIcon className="size-[22px]" />,
   whatsapp: <WhatsAppIcon size={22} />,
   instagram: <InstagramIcon size={22} />,
-  map: <Map size={22} strokeWidth={2} />,
-  bookings: <CalendarCheck size={22} strokeWidth={2} />,
-  hotel: <BedDouble size={22} strokeWidth={2} />,
+  map: <MapIcon className="size-[22px]" />,
+  bookings: <CalendarDaysIcon className="size-[22px]" />,
+  hotel: <BuildingOffice2Icon className="size-[22px]" />,
 };
 
 /**
@@ -39,34 +45,34 @@ const TINTS: Record<
   { chip: string; tile: string; hover: string }
 > = {
   emerald: {
-    chip: 'bg-gradient-to-br from-emerald-400 to-emerald-600',
+    chip: 'bg-emerald-600',
     tile: 'bg-gradient-to-br from-[#d1fae5] via-[#ecfdf5] to-[#f0fdfa]',
-    hover: 'hover:border-emerald-300/70',
+    hover: 'hover:border-emerald-500/60',
   },
   green: {
-    chip: 'bg-gradient-to-br from-[#4ade80] to-[#16a34a]',
+    chip: 'bg-[#16a34a]',
     tile: 'bg-gradient-to-br from-[#dcfce7] via-[#f0fdf4] to-[#ecfdf5]',
-    hover: 'hover:border-green-300/70',
+    hover: 'hover:border-green-500/60',
   },
   pink: {
-    chip: 'bg-gradient-to-br from-[#f9457f] to-[#c026d3]',
+    chip: 'bg-[#d6296b]',
     tile: 'bg-gradient-to-br from-[#fce7f3] via-[#fae8ff] to-[#fdf2f8]',
-    hover: 'hover:border-pink-300/70',
+    hover: 'hover:border-pink-500/60',
   },
   violet: {
-    chip: 'bg-gradient-to-br from-[#a78bfa] to-[#7137b3]',
+    chip: 'bg-brand',
     tile: 'bg-gradient-to-br from-[#ede9fe] via-[#f3e8ff] to-[#faf5ff]',
-    hover: 'hover:border-violet-300/70',
+    hover: 'hover:border-violet-500/60',
   },
   amber: {
-    chip: 'bg-gradient-to-br from-[#fbbf24] to-[#f97316]',
+    chip: 'bg-[#ea8b12]',
     tile: 'bg-gradient-to-br from-[#fef3c7] via-[#fef9c3] to-[#fffbeb]',
-    hover: 'hover:border-amber-300/70',
+    hover: 'hover:border-amber-500/60',
   },
   blue: {
-    chip: 'bg-gradient-to-br from-[#38bdf8] to-[#2563eb]',
+    chip: 'bg-[#2563eb]',
     tile: 'bg-gradient-to-br from-[#dbeafe] via-[#e0f2fe] to-[#eff6ff]',
-    hover: 'hover:border-blue-300/70',
+    hover: 'hover:border-blue-500/60',
   },
 };
 
@@ -99,9 +105,9 @@ export function Features() {
             return (
               <RevealItem key={feature.title}>
                 <article
-                  className={`card-edge group flex h-full flex-col p-6 mx-auto w-full max-w-[560px] md:max-w-none transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_64px_-26px_rgba(20,16,31,0.22)] ${tint.hover}`}>
+                  className={`card-edge mx-auto flex h-full w-full max-w-[560px] flex-col p-6 transition-colors duration-200 md:max-w-none ${tint.hover}`}>
                   <span
-                    className={`grid size-13 place-items-center rounded-2xl text-white shadow-[0_8px_20px_-8px_rgba(20,16,31,0.45)] transition-transform duration-500 group-hover:scale-105 ${tint.chip}`}>
+                    className={`grid size-12 place-items-center rounded-[10px] text-white ${tint.chip}`}>
                     {ICONS[feature.icon] ?? ICONS.leads}
                   </span>
 
@@ -111,14 +117,14 @@ export function Features() {
 
                   {/* The tile. Overflow hidden so the shot's corners stay
                       clipped by the tile radius while it scales on hover. */}
-                  <div className={`mt-5 overflow-hidden rounded-2xl p-4 sm:p-5 ${tint.tile}`}>
+                  <div className={`mt-5 overflow-hidden rounded-[10px] p-4 sm:p-5 ${tint.tile}`}>
                     <Shot
                       src={feature.shot}
                       alt={feature.alt}
                       ratio="16 / 10"
                       position="left top"
                       label={feature.title}
-                      className="transition-transform duration-700 group-hover:scale-[1.03]"
+                      className=""
                     />
                   </div>
 

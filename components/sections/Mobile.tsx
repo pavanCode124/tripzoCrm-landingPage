@@ -1,8 +1,12 @@
 'use client';
 
-import { Bell, Check, Wallet } from 'lucide-react';
-
-import { InstagramIcon, WhatsAppIcon } from '@/components/ui/BrandIcons';
+import {
+  BellIcon,
+  CheckIcon,
+  InstagramIcon,
+  WalletIcon,
+  WhatsAppIcon,
+} from '@/components/ui/icons';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { MOBILE } from '@/lib/content';
@@ -43,8 +47,8 @@ export function Mobile() {
                 {MOBILE.points.map((point) => (
                   <div key={point.title}>
                     <div className="flex items-center gap-2.5">
-                      <span className="grid size-6 place-items-center rounded-full bg-brand-wash">
-                        <Check size={13} className="text-brand" strokeWidth={3.5} />
+                      <span className="grid size-6 place-items-center rounded-[6px] bg-brand-wash">
+                        <CheckIcon className="size-3.5 text-brand" />
                       </span>
                       <h3 className="text-[1.0625rem] font-bold text-ink">{point.title}</h3>
                     </div>
@@ -100,9 +104,9 @@ function PhoneMock() {
               />
             </div>
 
-            <div className="rounded-2xl border border-hairline bg-canvas p-4">
+            <div className="rounded-[10px] border border-hairline bg-canvas p-4">
               <div className="flex items-center gap-2">
-                <Bell size={14} className="text-brand" />
+                <BellIcon className="size-3.5 text-brand" />
                 <p className="text-[0.8125rem] font-bold text-ink">New lead assigned</p>
               </div>
               <p className="mt-1.5 text-[0.75rem] leading-relaxed text-ink-faint">
@@ -110,9 +114,9 @@ function PhoneMock() {
               </p>
             </div>
 
-            <div className="flex items-center gap-3.5 rounded-2xl border border-hairline bg-canvas p-4">
-              <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent">
-                <Wallet size={16} />
+            <div className="flex items-center gap-3.5 rounded-[10px] border border-hairline bg-canvas p-4">
+              <span className="grid size-9 shrink-0 place-items-center rounded-[8px] bg-accent-soft text-accent">
+                <WalletIcon className="size-4" />
               </span>
               <div className="min-w-0">
                 <p className="text-[0.8125rem] font-bold text-ink">Expense logged</p>
@@ -142,10 +146,10 @@ function Tile({
   tone: string;
 }) {
   return (
-    <div className="rounded-2xl border border-hairline bg-canvas p-3.5">
+    <div className="rounded-[10px] border border-hairline bg-canvas p-3.5">
       <div className="flex items-start justify-between">
-        <span className={`grid size-9 place-items-center rounded-xl ${tone}`}>{icon}</span>
-        <span className="rounded-full bg-surface-2 px-2 py-0.5 text-[0.625rem] font-bold text-ink-muted">
+        <span className={`grid size-9 place-items-center rounded-[8px] ${tone}`}>{icon}</span>
+        <span className="rounded-[5px] bg-surface-2 px-2 py-0.5 text-[0.625rem] font-bold text-ink-muted">
           {badge}
         </span>
       </div>

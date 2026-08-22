@@ -32,7 +32,7 @@ export function Showcase() {
             {/* Blurred colour mesh */}
             <div
               aria-hidden="true"
-              className="absolute inset-0 overflow-hidden rounded-[32px]">
+              className="absolute inset-0 overflow-hidden rounded-[16px]">
               <div className="absolute inset-0 bg-gradient-to-br from-[#8b5cf6] via-[#38bdf8] to-[#2dd4bf]" />
               <div className="absolute -top-1/4 -left-1/5 size-[70%] rounded-full bg-[#e879f9] opacity-70 blur-[90px]" />
               <div className="absolute top-1/3 -right-1/5 size-[65%] rounded-full bg-[#7137b3] opacity-75 blur-[90px]" />
@@ -44,12 +44,12 @@ export function Showcase() {
 
             {/* The window. Padded on three sides, open at the bottom. */}
             <div className="relative px-4 pt-10 sm:px-10 sm:pt-16 lg:px-20 lg:pt-20">
-              <div className="overflow-hidden rounded-t-[18px] border border-white/25 bg-canvas shadow-[0_40px_90px_-30px_rgba(10,8,20,0.6)]">
+              <div className="overflow-hidden rounded-t-[12px] border border-white/25 bg-canvas shadow-[0_20px_50px_-24px_rgba(10,8,20,0.5)]">
                 <div className="flex items-center gap-2 border-b border-hairline bg-surface-2 px-4 py-3">
                   <span className="size-3 rounded-full bg-[#ff5f57]" />
                   <span className="size-3 rounded-full bg-[#febc2e]" />
                   <span className="size-3 rounded-full bg-[#28c840]" />
-                  <span className="mx-auto hidden rounded-md border border-hairline bg-canvas px-4 py-1 text-[0.75rem] text-ink-faint sm:block">
+                  <span className="mx-auto hidden rounded-[6px] border border-hairline bg-canvas px-4 py-1 text-[0.75rem] text-ink-faint sm:block">
                     app.tripzocrm.com/admin
                   </span>
                 </div>

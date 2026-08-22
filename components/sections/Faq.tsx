@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { Plus } from 'lucide-react';
+import { PlusIcon } from '@/components/ui/icons';
 import { useState } from 'react';
 
 import { Reveal } from '@/components/ui/Reveal';
@@ -33,7 +33,7 @@ export function Faq() {
             return (
               <Reveal key={faq.q} delay={i * 0.04}>
                 <div
-                  className={`mb-3 overflow-hidden rounded-2xl border transition-colors duration-300 ${
+                  className={`mb-3 overflow-hidden rounded-[10px] border transition-colors duration-200 ${
                     isOpen
                       ? 'border-brand/25 bg-brand-wash/45'
                       : 'border-hairline bg-canvas hover:border-hairline-strong'
@@ -53,7 +53,7 @@ export function Faq() {
                       animate={{ rotate: isOpen ? 45 : 0 }}
                       transition={{ duration: 0.25 }}
                       className={`mt-1 shrink-0 ${isOpen ? 'text-brand' : 'text-ink-faint'}`}>
-                      <Plus size={20} />
+                      <PlusIcon className="size-5" />
                     </motion.span>
                   </button>
 

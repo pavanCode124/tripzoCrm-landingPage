@@ -81,7 +81,7 @@ function ReportMock() {
           <p className="eyebrow">Daily report</p>
           <p className="mt-2 text-xl font-bold text-ink">Yesterday · 42 leads</p>
         </div>
-        <span className="rounded-full border border-hairline bg-surface-2 px-3 py-1.5 text-[0.75rem] font-medium text-ink-faint">
+        <span className="rounded-[6px] border border-hairline bg-surface-2 px-3 py-1.5 text-[0.75rem] font-medium text-ink-faint">
           Auto-sent 9:00 PM
         </span>
       </div>
@@ -92,7 +92,7 @@ function ReportMock() {
           { k: 'Pending', v: 19, c: 'text-amber-600', bg: 'bg-amber-50' },
           { k: 'Missed', v: 7, c: 'text-rose-600', bg: 'bg-rose-50' },
         ].map((s) => (
-          <div key={s.k} className={`rounded-2xl py-5 ${s.bg}`}>
+          <div key={s.k} className={`rounded-[10px] py-5 ${s.bg}`}>
             <p className={`text-4xl leading-none font-extrabold tracking-tight ${s.c}`}>{s.v}</p>
             <p className="mt-2 text-[0.75rem] font-bold tracking-[0.1em] text-ink-muted uppercase">
               {s.k}
@@ -113,7 +113,7 @@ function ReportMock() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.25 + i * 0.09, duration: 0.5 }}
-              className={`flex items-center gap-3.5 rounded-xl px-3.5 py-3 transition-colors ${
+              className={`flex items-center gap-3.5 rounded-[8px] px-3.5 py-3 transition-colors ${
                 flagged ? 'bg-rose-50 ring-1 ring-rose-200' : ''
               }`}>
               <span className="grid size-8 shrink-0 place-items-center rounded-full bg-surface-2 text-[0.6875rem] font-bold text-ink-muted">

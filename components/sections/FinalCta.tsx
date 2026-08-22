@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRightIcon } from '@/components/ui/icons';
 
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
@@ -16,7 +16,7 @@ export function FinalCta() {
   return (
     <section className="relative px-6 pb-24 sm:pb-32">
       <div className="mx-auto max-w-[1480px]">
-        <div className="grain relative overflow-hidden rounded-[32px] bg-gradient-to-br from-brand-deep via-brand to-brand-lift px-6 py-20 text-center sm:px-12 sm:py-28">
+        <div className="grain relative overflow-hidden rounded-[16px] bg-gradient-to-br from-brand-deep via-brand to-brand-lift px-6 py-20 text-center sm:px-12 sm:py-28">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_120%,rgba(255,255,255,0.25),transparent_58%)]"
@@ -55,10 +55,7 @@ export function FinalCta() {
                   size="lg"
                   className="w-full sm:w-auto">
                   {FINAL_CTA.primary}
-                  <ArrowRight
-                    size={18}
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                  />
+                  <ArrowRightIcon className="size-[18px]" />
                 </Button>
                 <Button
                   href={`${APP_URL}/login`}

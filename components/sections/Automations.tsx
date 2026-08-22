@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRightIcon } from '@/components/ui/icons';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
@@ -70,12 +70,9 @@ export function Automations() {
           <div className="mt-14 flex justify-center">
             <Link
               href={`${APP_URL}/login`}
-              className="group inline-flex h-13 items-center gap-2 rounded-full bg-white px-7 text-[1rem] font-semibold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-wash">
+              className="inline-flex h-13 items-center gap-2 rounded-[10px] bg-white px-7 text-[1rem] font-semibold text-ink transition-colors duration-200 hover:bg-brand-wash">
               {AUTOMATIONS.cta}
-              <ArrowUpRight
-                size={17}
-                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
+              <ArrowUpRightIcon className="size-[17px]" />
             </Link>
           </div>
         </Reveal>
@@ -164,9 +161,9 @@ function Card({
   return (
     <article
       aria-hidden={duplicate || undefined}
-      className="mr-5 flex w-[300px] shrink-0 flex-col rounded-2xl bg-white p-6 shadow-[0_18px_44px_-20px_rgba(0,0,0,0.55)] sm:w-[340px]">
+      className="mr-5 flex w-[300px] shrink-0 flex-col rounded-[12px] bg-white p-6 sm:w-[340px]">
       <span
-        className={`inline-flex w-fit items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.6875rem] font-bold tracking-[0.08em] uppercase ${chip} ${accent}`}>
+        className={`inline-flex w-fit items-center gap-1.5 rounded-[6px] border px-2.5 py-1 text-[0.6875rem] font-bold tracking-[0.08em] uppercase ${chip} ${accent}`}>
         {icon}
         {label}
       </span>

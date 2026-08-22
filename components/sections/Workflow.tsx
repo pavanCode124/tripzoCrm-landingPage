@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRightIcon } from '@/components/ui/icons';
 
 import { RevealGroup, RevealItem } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -42,7 +42,7 @@ export function Workflow() {
         <RevealGroup className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
           {WORKFLOW.steps.map((step, i) => (
             <RevealItem key={step.step}>
-              <article className="card-edge-dark group relative h-full overflow-hidden p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-brand-lift/40">
+              <article className="card-edge-dark group relative h-full overflow-hidden p-7 transition-colors duration-200 hover:border-brand-lift/50">
                 <span
                   aria-hidden="true"
                   className="pointer-events-none absolute -top-20 -right-16 size-48 rounded-full bg-brand-lift/15 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
@@ -54,10 +54,7 @@ export function Workflow() {
                   </span>
                   {/* The last card has nothing to point at, so it loses the arrow. */}
                   {i < WORKFLOW.steps.length - 1 ? (
-                    <ArrowRight
-                      size={18}
-                      className="mt-2 text-chalk-faint transition-all duration-500 group-hover:translate-x-1 group-hover:text-brand-lift"
-                    />
+                    <ArrowRightIcon className="mt-2 size-[18px] text-chalk-faint transition-colors duration-200 group-hover:text-brand-lift" />
                   ) : null}
                 </div>
 

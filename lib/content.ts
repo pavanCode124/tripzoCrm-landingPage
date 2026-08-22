@@ -16,12 +16,10 @@ export const NAV_LINKS = [
 ];
 
 export const HERO = {
-  eyebrow: 'The travel agency operating system',
   headlinePlain: 'Turn every travel inquiry',
   headlineAccent: 'into a booking.',
   sub: 'TripzoCRM brings your leads, WhatsApp, Instagram, packages, itineraries, invoices and trip profitability into one place — so your agency stops losing inquiries in a thousand unread chats and starts closing them.',
   primaryCta: 'Get started free',
-  secondaryCta: 'See how it works',
   assurances: ['No credit card required', 'Secure & role-based', 'Built for global agencies'],
 };
 

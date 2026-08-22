@@ -1,6 +1,6 @@
 'use client';
 
-import { ImageIcon } from 'lucide-react';
+import { PhotoIcon } from '@/components/ui/icons';
 import { useEffect, useRef, useState } from 'react';
 
 /**
@@ -61,7 +61,7 @@ export function Shot({
 
   return (
     <div
-      className={`relative overflow-hidden rounded-xl border border-black/[0.07] bg-white/70 shadow-[0_18px_40px_-18px_rgba(20,16,31,0.35)] ${className}`}
+      className={`relative overflow-hidden rounded-[8px] border border-black/[0.07] bg-white/70 shadow-[0_2px_8px_-3px_rgba(20,16,31,0.2)] ${className}`}
       style={{ aspectRatio: ratio }}>
       {failed ? (
         <Placeholder src={src} label={label} />
@@ -104,7 +104,7 @@ function Placeholder({ src, label }: { src: string; label?: string }) {
       </div>
 
       <div className="relative flex flex-col items-center gap-1.5 px-4 text-center">
-        <ImageIcon size={20} className="text-ink/30" strokeWidth={1.5} />
+        <PhotoIcon className="size-5 text-ink/30" />
         <p className="text-[0.6875rem] font-bold tracking-wide text-ink/50">{name}</p>
         {label ? <p className="text-[0.625rem] text-ink/35">{label}</p> : null}
         <p className="text-[0.625rem] text-ink/30">add to public/shots</p>

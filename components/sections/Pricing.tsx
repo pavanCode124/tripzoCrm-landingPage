@@ -1,6 +1,6 @@
 'use client';
 
-import { Check } from 'lucide-react';
+import { CheckIcon } from '@/components/ui/icons';
 
 import { Button } from '@/components/ui/Button';
 import { RevealGroup, RevealItem } from '@/components/ui/Reveal';
@@ -30,10 +30,10 @@ export function Pricing() {
           {PRICING.plans.map((plan) => (
             <RevealItem key={plan.name}>
               <article
-                className={`relative mx-auto h-full w-full max-w-[560px] overflow-hidden rounded-[24px] p-8 transition-all duration-500 lg:max-w-none ${
+                className={`relative mx-auto h-full w-full max-w-[560px] overflow-hidden rounded-[12px] p-8 transition-colors duration-200 lg:max-w-none ${
                   plan.featured
-                    ? 'border border-dark-hairline bg-dark shadow-[0_36px_80px_-28px_rgba(113,55,179,0.55)] lg:-mt-6 lg:pt-11 lg:pb-11'
-                    : 'card-edge hover:-translate-y-1.5 hover:border-brand/25'
+                    ? 'border border-dark-hairline bg-dark lg:-mt-6 lg:pt-11 lg:pb-11'
+                    : 'card-edge hover:border-brand/40'
                 }`}>
                 {plan.featured ? (
                   <>
@@ -41,7 +41,7 @@ export function Pricing() {
                       aria-hidden="true"
                       className="pointer-events-none absolute -top-32 left-1/2 h-64 w-80 -translate-x-1/2 rounded-full bg-brand/40 blur-3xl"
                     />
-                    <span className="relative mb-6 inline-flex rounded-full bg-gradient-to-r from-brand-lift to-brand px-3.5 py-1.5 text-[0.6875rem] font-extrabold tracking-[0.14em] text-white uppercase">
+                    <span className="relative mb-6 inline-flex rounded-[6px] bg-brand px-3 py-1.5 text-[0.6875rem] font-extrabold tracking-[0.14em] text-white uppercase">
                       Most popular
                     </span>
                   </>
@@ -79,10 +79,8 @@ export function Pricing() {
                 <ul className="relative space-y-3.5">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex gap-3">
-                      <Check
-                        size={17}
-                        strokeWidth={2.75}
-                        className={`mt-0.5 shrink-0 ${plan.featured ? 'text-brand-lift' : 'text-accent'}`}
+                      <CheckIcon
+                        className={`mt-0.5 size-[17px] shrink-0 ${plan.featured ? 'text-brand-lift' : 'text-accent'}`}
                       />
                       <span
                         className={`text-body-lg ${plan.featured ? 'text-chalk-muted' : 'text-ink-muted'}`}>

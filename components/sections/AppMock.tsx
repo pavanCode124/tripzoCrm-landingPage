@@ -1,9 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Bell, CheckCheck, Search, Send } from 'lucide-react';
-
-import { InstagramIcon } from '@/components/ui/BrandIcons';
+import {
+  BellIcon,
+  CheckCircleIcon,
+  InstagramIcon,
+  MagnifyingGlassIcon,
+  PaperAirplaneIcon,
+} from '@/components/ui/icons';
 
 /**
  * The hero's product shot — drawn, not screenshotted.
@@ -26,7 +30,7 @@ export function AppMock() {
         className="absolute -inset-x-10 -top-10 -bottom-12 rounded-[42px] bg-[radial-gradient(ellipse_at_50%_0%,rgba(155,93,229,0.18),transparent_62%)] blur-2xl"
       />
 
-      <div className="glow relative overflow-hidden rounded-[24px] border border-hairline bg-canvas">
+      <div className="relative overflow-hidden rounded-[14px] border border-hairline bg-canvas shadow-[0_2px_10px_-4px_rgba(20,16,31,0.18)]">
         <Chrome />
 
         <div className="grid grid-cols-1 lg:grid-cols-[60px_1fr_330px]">
@@ -54,9 +58,9 @@ function Chrome() {
         app.tripzocrm.com
       </div>
       <div className="ml-auto flex items-center gap-3.5 lg:ml-0">
-        <Search size={15} className="text-ink-faint" />
+        <MagnifyingGlassIcon className="size-4 text-ink-faint" />
         <span className="relative">
-          <Bell size={15} className="text-ink-faint" />
+          <BellIcon className="size-4 text-ink-faint" />
           <span className="absolute -top-0.5 -right-0.5 size-1.5 rounded-full bg-brand" />
         </span>
       </div>
@@ -68,7 +72,7 @@ function Chrome() {
 function Rail() {
   return (
     <div className="hidden flex-col items-center gap-4 border-r border-hairline bg-surface-2 py-6 lg:flex">
-      <span className="size-8 rounded-xl bg-gradient-to-br from-brand-lift to-brand" />
+      <span className="size-8 rounded-[8px] bg-brand" />
       <span className="mt-1 h-px w-7 bg-hairline-strong" />
       {[0, 1, 2, 3, 4].map((i) => (
         <span
@@ -98,7 +102,7 @@ function Pipeline() {
           </p>
           <p className="mt-1.5 text-xl font-bold text-ink">This week</p>
         </div>
-        <span className="rounded-full border border-accent/25 bg-accent-soft px-3 py-1.5 text-[0.75rem] font-bold text-accent">
+        <span className="rounded-[6px] border border-accent/25 bg-accent-soft px-3 py-1.5 text-[0.75rem] font-bold text-accent">
           +24 new
         </span>
       </div>
@@ -131,7 +135,7 @@ function Pipeline() {
           { k: 'Instagram', v: '7', c: 'text-ig' },
           { k: 'Website', v: '3', c: 'text-ink-muted' },
         ].map((s) => (
-          <div key={s.k} className="rounded-2xl border border-hairline bg-surface-2 p-4">
+          <div key={s.k} className="rounded-[8px] border border-hairline bg-surface-2 p-4">
             <p className={`text-2xl font-bold tabular-nums ${s.c}`}>{s.v}</p>
             <p className="mt-1 text-[0.75rem] font-medium text-ink-faint">{s.k}</p>
           </div>
@@ -154,7 +158,7 @@ function ChatPanel() {
             <InstagramIcon size={10} /> @ananya.travels
           </p>
         </div>
-        <span className="rounded-full bg-amber-100 px-2.5 py-1 text-[0.6875rem] font-bold text-amber-700">
+        <span className="rounded-[5px] bg-amber-100 px-2.5 py-1 text-[0.6875rem] font-bold text-amber-700">
           Bot
         </span>
       </div>
@@ -169,10 +173,10 @@ function ChatPanel() {
       </div>
 
       <div className="border-t border-hairline px-5 py-3.5">
-        <div className="flex items-center gap-2 rounded-full border border-hairline bg-surface-2 py-2 pr-1.5 pl-4">
+        <div className="flex items-center gap-2 rounded-[8px] border border-hairline bg-surface-2 py-2 pr-1.5 pl-4">
           <span className="flex-1 text-[0.8125rem] text-ink-faint">Type a message…</span>
-          <span className="grid size-8 place-items-center rounded-full bg-gradient-to-br from-brand-lift to-brand text-white">
-            <Send size={13} />
+          <span className="grid size-8 place-items-center rounded-[6px] bg-brand text-white">
+            <PaperAirplaneIcon className="size-3.5" />
           </span>
         </div>
       </div>
@@ -193,7 +197,7 @@ function Bubble({ side, children }: { side: 'in' | 'out'; children: React.ReactN
         {children}
         {out ? (
           <span className="mt-1.5 flex items-center justify-end gap-1 text-[0.625rem] text-white/65">
-            12:04 <CheckCheck size={11} className="text-sky-300" />
+            12:04 <CheckCircleIcon className="size-3 text-sky-300" />
           </span>
         ) : null}
       </div>
@@ -230,10 +234,10 @@ function FloatingCards() {
         initial={{ opacity: 0, x: -18, y: 10 }}
         animate={{ opacity: 1, x: 0, y: 0 }}
         transition={{ delay: 1.1, duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
-        className="animate-float-slow absolute -bottom-8 -left-2 hidden items-center gap-3.5 rounded-2xl border border-hairline bg-canvas px-5 py-4 shadow-[0_24px_50px_-18px_rgba(20,16,31,0.22)] sm:flex md:-left-8">
-        <span className="relative grid size-10 place-items-center rounded-xl bg-ig/10">
+        className="animate-float-slow absolute -bottom-8 -left-2 hidden items-center gap-3.5 rounded-[10px] border border-hairline bg-canvas px-5 py-4 shadow-[0_4px_14px_-6px_rgba(20,16,31,0.2)] sm:flex md:-left-8">
+        <span className="relative grid size-10 place-items-center rounded-[8px] bg-ig/10">
           <InstagramIcon size={18} className="text-ig" />
-          <span className="animate-pulse-ring absolute inset-0 rounded-xl ring-2 ring-ig/40" />
+          <span className="animate-pulse-ring absolute inset-0 rounded-[8px] ring-2 ring-ig/40" />
         </span>
         <div>
           <p className="text-[0.875rem] font-semibold text-ink">New Instagram lead</p>
@@ -245,10 +249,10 @@ function FloatingCards() {
         initial={{ opacity: 0, x: 18, y: 10 }}
         animate={{ opacity: 1, x: 0, y: 0 }}
         transition={{ delay: 1.35, duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
-        className="animate-float-slow absolute -top-7 -right-2 hidden items-center gap-3.5 rounded-2xl border border-hairline bg-canvas px-5 py-4 shadow-[0_24px_50px_-18px_rgba(20,16,31,0.22)] md:-right-8 lg:flex"
+        className="animate-float-slow absolute -top-7 -right-2 hidden items-center gap-3.5 rounded-[10px] border border-hairline bg-canvas px-5 py-4 shadow-[0_4px_14px_-6px_rgba(20,16,31,0.2)] md:-right-8 lg:flex"
         style={{ animationDelay: '1.5s' }}>
-        <span className="grid size-10 place-items-center rounded-xl bg-accent-soft text-accent">
-          <CheckCheck size={18} />
+        <span className="grid size-10 place-items-center rounded-[8px] bg-accent-soft text-accent">
+          <CheckCircleIcon className="size-[18px]" />
         </span>
         <div>
           <p className="text-[0.875rem] font-semibold text-ink">Payment received</p>
