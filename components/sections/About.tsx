@@ -20,12 +20,13 @@ export function About() {
   return (
     <section id="about" className="relative overflow-hidden py-24 sm:py-32">
       {/*
-       * Cropped to the upper third. why_tripzo.png has "TIME TO TRAVEL" set into
-       * the lower part of the frame, and showing it here would put two competing
-       * headlines on the same screen. The planes and skyline carry the idea on
-       * their own.
+       * Cropped to the middle band — 28%-56% of the source — which is exactly
+       * where the aeroplane sits. Above that is only rooftops; below it is the
+       * "TIME TO TRAVEL" lettering baked into the photograph, which would put
+       * two competing headlines on one screen. This band has the subject and
+       * neither problem.
        */}
-      <PhotoBackdrop src="/shots/why_tripzo.png" position="center 14%" spotlight={0.9} veil={0.2} />
+      <PhotoBackdrop src="/shots/why_tripzo.png" position="center 42%" spotlight={0.5} veil={0.06} />
 
       <div className="shell relative z-10">
         <SectionHeading

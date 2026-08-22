@@ -36,9 +36,9 @@ const item = {
 export function Hero() {
   return (
     <section className="relative overflow-hidden pt-[150px] pb-20 sm:pt-[176px] md:pb-28">
-      {/* The photograph. A small `scale` hides the softest edge of a 768px-wide
-          source being stretched to full width. */}
-      <PhotoBackdrop src="/shots/Home_background.png" position="center 30%" spotlight={0.92} veil={0.18} scale={1.04} />
+      {/* No `scale` here: the source is 768px wide and already stretched ~2.5x
+          to cover the page, so any extra zoom is pure additional softness. */}
+      <PhotoBackdrop src="/shots/Home_background.png" position="center 42%" spotlight={0.44} veil={0.06} />
 
       <motion.div
         className="shell relative z-10"

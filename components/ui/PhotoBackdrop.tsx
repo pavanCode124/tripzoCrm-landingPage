@@ -25,11 +25,11 @@
 export function PhotoBackdrop({
   src,
   position = 'center',
-  /** The soft ellipse behind the copy. Raise it if a section's text sits on a
-      busy part of the photograph. */
-  spotlight = 0.9,
-  /** Light overall veil. Keep low — this is the knob that killed the picture. */
-  veil = 0.22,
+  /** The soft ellipse behind the copy. Raise it only if text lands on a busy
+      part of the photograph — it is also the knob that hides the subject. */
+  spotlight = 0.6,
+  /** Light overall veil. Keep low — this is what flattened the picture before. */
+  veil = 0.1,
   scale = 1,
 }: {
   src: string;
@@ -47,18 +47,33 @@ export function PhotoBackdrop({
         style={{
           objectPosition: position,
           transform: scale === 1 ? undefined : `scale(${scale})`,
-          filter: 'saturate(1.02) contrast(1.02)',
+          /*
+           * Both sources are small and are being upscaled well past their native
+           * width, which reads as mush. Nothing in CSS adds detail back, but
+           * lifting local contrast and saturation makes the edges that DO exist
+           * assert themselves, and that is most of what "sharp" looks like.
+           */
+          filter: 'saturate(1.14) contrast(1.16) brightness(1.02)',
         }}
       />
 
       {/* Light overall veil */}
       <div className="absolute inset-0" style={{ backgroundColor: `rgba(255,255,255,${veil})` }} />
 
-      {/* The local scrim — this is what makes the text readable, not the veil. */}
+      {/*
+       * The local scrim.
+       *
+       * Tuned narrow and low on purpose. The first version was a 58%-wide
+       * ellipse at 0.92 opacity, which did protect the text — and painted out
+       * the paraglider, the one thing in the photograph worth seeing. The text
+       * column is only ~40% of the page width, so the scrim has no business
+       * being wider than that, and the sky behind the copy is already bright
+       * enough that it does not need to be near-opaque either.
+       */}
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 58% 48% at 50% 42%, rgba(255,255,255,${spotlight}) 0%, rgba(255,255,255,${spotlight * 0.82}) 42%, rgba(255,255,255,0) 78%)`,
+          background: `radial-gradient(ellipse 42% 34% at 50% 34%, rgba(255,255,255,${spotlight}) 0%, rgba(255,255,255,${spotlight * 0.7}) 55%, rgba(255,255,255,0) 82%)`,
         }}
       />
 
