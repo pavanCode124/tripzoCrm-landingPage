@@ -60,7 +60,7 @@ export function Channels() {
             return (
               <RevealItem key={channel.key}>
                 <article
-                  className={`card-edge group relative h-full overflow-hidden p-8 transition-all duration-500 hover:-translate-y-1.5 ${look.border}`}>
+                  className={`card-edge group relative h-full overflow-hidden p-8 mx-auto w-full max-w-[560px] lg:max-w-none transition-all duration-500 hover:-translate-y-1.5 ${look.border}`}>
                   {/* Channel-coloured cap, revealed on hover. */}
                   <span
                     aria-hidden="true"

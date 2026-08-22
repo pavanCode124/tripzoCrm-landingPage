@@ -99,7 +99,7 @@ export function Features() {
             return (
               <RevealItem key={feature.title}>
                 <article
-                  className={`card-edge group flex h-full flex-col p-6 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_64px_-26px_rgba(20,16,31,0.22)] ${tint.hover}`}>
+                  className={`card-edge group flex h-full flex-col p-6 mx-auto w-full max-w-[560px] md:max-w-none transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_64px_-26px_rgba(20,16,31,0.22)] ${tint.hover}`}>
                   <span
                     className={`grid size-13 place-items-center rounded-2xl text-white shadow-[0_8px_20px_-8px_rgba(20,16,31,0.45)] transition-transform duration-500 group-hover:scale-105 ${tint.chip}`}>
                     {ICONS[feature.icon] ?? ICONS.leads}

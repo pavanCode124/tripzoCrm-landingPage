@@ -30,7 +30,7 @@ export function Pricing() {
           {PRICING.plans.map((plan) => (
             <RevealItem key={plan.name}>
               <article
-                className={`relative h-full overflow-hidden rounded-[24px] p-8 transition-all duration-500 ${
+                className={`relative mx-auto h-full w-full max-w-[560px] overflow-hidden rounded-[24px] p-8 transition-all duration-500 lg:max-w-none ${
                   plan.featured
                     ? 'border border-dark-hairline bg-dark shadow-[0_36px_80px_-28px_rgba(113,55,179,0.55)] lg:-mt-6 lg:pt-11 lg:pb-11'
                     : 'card-edge hover:-translate-y-1.5 hover:border-brand/25'
