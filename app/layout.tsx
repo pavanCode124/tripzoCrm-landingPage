@@ -1,48 +1,42 @@
 import type { Metadata, Viewport } from 'next';
-import { Instrument_Serif, Plus_Jakarta_Sans } from 'next/font/google';
+import { Bricolage_Grotesque, Plus_Jakarta_Sans } from 'next/font/google';
 
 import './globals.css';
 
 /**
- * Two faces, doing two jobs.
+ * Two faces, two jobs.
  *
- * Plus Jakarta Sans replaced Inter for the UI. Inter is the default of every
- * SaaS template on the internet, which is exactly the problem — it is
- * competent and completely anonymous. Jakarta is geometric with a taller
- * x-height and genuinely distinctive letterforms (the single-storey 'a' at
- * weight 800, the flat-sided 'o'), so headings set in it look designed rather
- * than typed. Its numerals are also better proportioned, which matters on a
- * page whose loudest elements are "10x" and "24/7".
+ * Plus Jakarta Sans is the product's own UI face (the mobile app ships it), so
+ * every sentence on this page is set in the same letters an agent will read in
+ * the CRM on day one.
  *
- * Instrument Serif still carries the italic display accents and nothing else.
- *
- * Both are self-hosted by next/font at build time: no render-blocking request
- * to Google, no layout shift, and `display: swap` so text paints immediately.
+ * Bricolage Grotesque carries the headings. It is a grotesque with an optical
+ * size axis: at display sizes the counters tighten and the terminals sharpen, so
+ * a 72px headline looks drawn rather than scaled up. It replaced a display serif,
+ * which read editorial on a page that is selling software.
  */
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-sans-custom',
+  variable: '--font-jakarta',
 });
 
-const instrumentSerif = Instrument_Serif({
+const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
-  weight: '400',
-  style: ['normal', 'italic'],
   display: 'swap',
-  variable: '--font-instrument',
+  variable: '--font-bricolage',
 });
 
 const SITE = 'https://www.tripzocrm.com';
-const TITLE = 'TripzoCRM — The Travel Agency Operating System';
+const TITLE = 'TripzoCRM | The CRM built for travel agencies';
 const DESCRIPTION =
-  'Leads, WhatsApp, Instagram, packages, itineraries, invoices and trip P&L in one place. Built end to end for travel agencies — so no inquiry is ever lost again.';
+  'Leads, WhatsApp, Instagram, packages, itineraries, invoices and trip profit in one place. Built end to end for travel agencies, so no inquiry is ever lost again.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
     default: TITLE,
-    template: '%s · TripzoCRM',
+    template: '%s | TripzoCRM',
   },
   description: DESCRIPTION,
   keywords: [
@@ -71,14 +65,17 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: '#ffffff',
+  colorScheme: 'light',
   width: 'device-width',
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${instrumentSerif.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${jakarta.variable} ${bricolage.variable}`}>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }

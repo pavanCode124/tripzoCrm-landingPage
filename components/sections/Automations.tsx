@@ -1,11 +1,11 @@
-import { ArrowUpRightIcon } from '@/components/ui/icons';
-import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 import { InstagramIcon, WhatsAppIcon } from '@/components/ui/BrandIcons';
+import { Button } from '@/components/ui/Button';
+import { ArrowUpRightIcon } from '@/components/ui/icons';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { APP_URL, AUTOMATIONS } from '@/lib/content';
+import { AUTOMATIONS, CTA, SIGNUP_URL } from '@/lib/content';
 
 /**
  * The automation marquee.
@@ -29,14 +29,12 @@ import { APP_URL, AUTOMATIONS } from '@/lib/content';
  */
 export function Automations() {
   return (
-    <section id="automations" className="section-edge-light grain relative overflow-hidden bg-dark py-24 sm:py-32">
+    <section id="automations" className="section-edge relative overflow-hidden bg-canvas-2 py-24 sm:py-32">
       <Decor />
 
       <div className="relative">
         <div className="shell">
           <SectionHeading
-            tone="dark"
-            eyebrow={AUTOMATIONS.eyebrow}
             title={AUTOMATIONS.title}
             accent={AUTOMATIONS.accent}
             sub={AUTOMATIONS.sub}
@@ -50,7 +48,7 @@ export function Automations() {
             label="WhatsApp"
             icon={<WhatsAppIcon size={15} />}
             accent="text-wa"
-            chip="bg-wa/12 border-wa/25"
+            chip="bg-[#e7f8ee] border-wa/20"
             items={AUTOMATIONS.whatsapp}
             direction="left"
             duration="72s"
@@ -59,7 +57,7 @@ export function Automations() {
             label="Instagram"
             icon={<InstagramIcon size={15} />}
             accent="text-ig"
-            chip="bg-ig/12 border-ig/25"
+            chip="bg-[#fde8ef] border-ig/20"
             items={AUTOMATIONS.instagram}
             direction="right"
             duration="84s"
@@ -68,12 +66,10 @@ export function Automations() {
 
         <Reveal delay={0.1}>
           <div className="mt-14 flex justify-center">
-            <Link
-              href={`${APP_URL}/login`}
-              className="inline-flex h-13 items-center gap-2 rounded-[10px] bg-white px-7 text-[1rem] font-semibold text-ink transition-colors duration-200 hover:bg-brand-wash">
-              {AUTOMATIONS.cta}
+            <Button href={SIGNUP_URL} variant="secondary" size="lg">
+              {CTA.demo}
               <ArrowUpRightIcon className="size-[17px]" />
-            </Link>
+            </Button>
           </div>
         </Reveal>
       </div>
@@ -161,47 +157,27 @@ function Card({
   return (
     <article
       aria-hidden={duplicate || undefined}
-      className="mr-5 flex w-[300px] shrink-0 flex-col rounded-[12px] bg-white p-6 sm:w-[340px]">
+      className="mr-5 flex w-[300px] shrink-0 flex-col rounded-[18px] border border-line bg-white p-6 shadow-[0_1px_2px_rgba(18,15,28,0.04),0_10px_24px_-16px_rgba(63,29,107,0.18)] sm:w-[340px]">
       <span
         className={`inline-flex w-fit items-center gap-1.5 rounded-[6px] border px-2.5 py-1 text-[0.6875rem] font-bold tracking-[0.08em] uppercase ${chip} ${accent}`}>
         {icon}
         {label}
       </span>
-      <h3 className="mt-4 text-[1.125rem] font-bold tracking-tight text-ink">{item.title}</h3>
-      <p className="mt-2 text-[0.9375rem] leading-relaxed text-ink-muted text-pretty">
+      <h3 className="font-display mt-4 text-[1.125rem] font-semibold tracking-[-0.01em] text-ink">{item.title}</h3>
+      <p className="mt-2 text-[0.9375rem] leading-relaxed text-pretty text-ink-muted">
         {item.body}
       </p>
     </article>
   );
 }
 
-/**
- * Thin diagonal strokes and two channel-coloured blooms.
- *
- * The diagonals are the reference's one piece of graphic texture, and on a large
- * flat dark area they matter — without them the band reads as an unlit gap
- * between two white sections rather than as a designed surface.
- */
+/** Two channel-coloured blooms, one per rail. */
 function Decor() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div className="absolute -top-32 left-1/4 size-[520px] rounded-full bg-[radial-gradient(circle,rgba(37,211,102,0.16),transparent_65%)] blur-2xl" />
-      <div className="absolute -right-24 -bottom-40 size-[560px] rounded-full bg-[radial-gradient(circle,rgba(225,48,108,0.16),transparent_65%)] blur-2xl" />
+      <div className="absolute -top-32 left-1/4 size-[520px] rounded-full bg-[radial-gradient(circle,rgba(37,211,102,0.10),transparent_65%)] blur-2xl" />
+      <div className="absolute -right-24 -bottom-40 size-[560px] rounded-full bg-[radial-gradient(circle,rgba(240,69,127,0.10),transparent_65%)] blur-2xl" />
 
-      <svg className="absolute inset-0 size-full opacity-[0.16]" preserveAspectRatio="none">
-        <defs>
-          <pattern
-            id="automation-diagonals"
-            width="220"
-            height="220"
-            patternUnits="userSpaceOnUse"
-            patternTransform="rotate(-24)">
-            <line x1="0" y1="0" x2="0" y2="220" stroke="#4ade80" strokeWidth="1" />
-            <line x1="110" y1="0" x2="110" y2="220" stroke="#ffffff" strokeWidth="0.5" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#automation-diagonals)" />
-      </svg>
     </div>
   );
 }

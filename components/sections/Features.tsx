@@ -10,139 +10,120 @@ import {
   UsersIcon,
   WhatsAppIcon,
 } from '@/components/ui/icons';
-import { RevealGroup, RevealItem } from '@/components/ui/Reveal';
+import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Shot } from '@/components/ui/Shot';
 import { FEATURES } from '@/lib/content';
 
-/**
- * Icons.
- *
- * A plain map of ReactNode rather than of LucideIcon, because two of the six
- * are our own SVGs — lucide dropped brand marks at v1, so WhatsApp and
- * Instagram come from components/ui/BrandIcons.
- */
+type Feature = (typeof FEATURES)[number];
+
 const ICONS: Record<string, ReactNode> = {
-  leads: <UsersIcon className="size-[19px]" />,
-  whatsapp: <WhatsAppIcon size={19} />,
-  instagram: <InstagramIcon size={19} />,
-  map: <MapIcon className="size-[19px]" />,
-  bookings: <CalendarDaysIcon className="size-[19px]" />,
-  hotel: <BuildingOffice2Icon className="size-[19px]" />,
+  leads: <UsersIcon className="size-5" />,
+  whatsapp: <WhatsAppIcon size={20} />,
+  instagram: <InstagramIcon size={20} />,
+  map: <MapIcon className="size-5" />,
+  bookings: <CalendarDaysIcon className="size-5" />,
+  hotel: <BuildingOffice2Icon className="size-5" />,
 };
 
 /**
- * Per-card colour.
- *
- * `chip` is a saturated gradient with a white glyph — the solid rounded-square
- * icon tile from the reference. `tile` is the pale wash the screenshot sits on,
- * pitched much lighter than the chip on purpose: the chip is a 40px accent and
- * can afford full saturation, while the tile is a third of the card and would
- * fight the screenshot for attention if it matched.
+ * Chip colour and the soft stage the screenshot sits on. Brand purple for the
+ * modules; the two channels keep their own colour, as they do in the product.
  */
-const TINTS: Record<
-  string,
-  { chip: string; tile: string; hover: string }
-> = {
-  emerald: {
-    chip: 'bg-emerald-600',
-    tile: 'bg-gradient-to-br from-[#d1fae5] via-[#ecfdf5] to-[#f0fdfa]',
-    hover: 'hover:border-emerald-500/60',
-  },
-  green: {
-    chip: 'bg-[#16a34a]',
-    tile: 'bg-gradient-to-br from-[#dcfce7] via-[#f0fdf4] to-[#ecfdf5]',
-    hover: 'hover:border-green-500/60',
-  },
-  pink: {
-    chip: 'bg-[#d6296b]',
-    tile: 'bg-gradient-to-br from-[#fce7f3] via-[#fae8ff] to-[#fdf2f8]',
-    hover: 'hover:border-pink-500/60',
-  },
-  violet: {
-    chip: 'bg-brand',
-    tile: 'bg-gradient-to-br from-[#ede9fe] via-[#f3e8ff] to-[#faf5ff]',
-    hover: 'hover:border-violet-500/60',
-  },
-  amber: {
-    chip: 'bg-[#ea8b12]',
-    tile: 'bg-gradient-to-br from-[#fef3c7] via-[#fef9c3] to-[#fffbeb]',
-    hover: 'hover:border-amber-500/60',
-  },
-  blue: {
-    chip: 'bg-[#2563eb]',
-    tile: 'bg-gradient-to-br from-[#dbeafe] via-[#e0f2fe] to-[#eff6ff]',
-    hover: 'hover:border-blue-500/60',
-  },
+const LOOK: Record<string, { chip: string; stage: string }> = {
+  leads: { chip: 'bg-brand-wash text-brand', stage: 'from-[#efe6fd] via-[#f6f2fd] to-[#fbfaff]' },
+  whatsapp: { chip: 'bg-[#e7f8ee] text-wa', stage: 'from-[#e3f6ea] via-[#f1fbf5] to-[#fafdfb]' },
+  instagram: { chip: 'bg-[#fde8ef] text-ig', stage: 'from-[#fde7ef] via-[#fdf2f6] to-[#fffafc]' },
+  map: { chip: 'bg-brand-wash text-brand', stage: 'from-[#efe6fd] via-[#f6f2fd] to-[#fbfaff]' },
+  bookings: { chip: 'bg-[#fff1e3] text-[#c2410c]', stage: 'from-[#fff0e1] via-[#fff7ef] to-[#fffcf8]' },
+  hotel: { chip: 'bg-[#e3f2fd] text-[#0369a1]', stage: 'from-[#e2f1fd] via-[#f0f8fe] to-[#fafdff]' },
 };
 
 /**
- * The capability grid.
+ * The six modules, each with its real screenshot shown whole.
  *
- * Icon and title ABOVE the picture, body below it — the reading order the
- * reference uses, and the right one: the title says what you are about to look
- * at, so the screenshot is understood on sight rather than decoded and then
- * explained.
- *
- * Six cards, deliberately. Nine is a list nobody reads; three undersells a
- * product this broad.
+ * Three rhythms: a wide feature, a two-by-two grid, and a second wide feature
+ * with the picture on the other side. Every screenshot keeps its own aspect
+ * ratio inside a browser frame, so nothing is cropped mid-table.
  */
 export function Features() {
+  const [lead, wa, ig, map, bookings, hotel] = FEATURES;
+
   return (
-    <section id="features" className="section-edge relative py-24 sm:py-32">
-      <div className="shell">
+    <section id="features" className="section-edge relative overflow-hidden py-24 sm:py-32">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_35%_at_15%_20%,rgba(155,93,229,0.10),transparent_70%),radial-gradient(ellipse_50%_30%_at_90%_55%,rgba(37,211,102,0.08),transparent_70%),radial-gradient(ellipse_55%_30%_at_20%_90%,rgba(255,196,150,0.14),transparent_70%)]"
+      />
+      <div className="shell relative">
         <SectionHeading
-          eyebrow="Everything you need"
           title="One platform."
-          accent="Every channel."
-          sub="Designed end to end for travel agencies — from the first unread message to the final settled invoice, with the workflows your team already uses."
+          accent="Every part of the trip."
+          sub="From the first unread message to the settled invoice, built around the way travel agencies already work."
         />
 
-        {/*
-         * The grid sits inside a glass panel rather than floating on the page.
-         * Six white cards on a white ground have nothing to belong to — the
-         * container gives them an edge to sit within, and the faint tint behind
-         * separates card from page without adding another border weight.
-         */}
-        <div className="mt-16 rounded-[18px] border border-hairline bg-white/50 p-4 shadow-[0_1px_2px_rgba(20,16,31,0.04)] backdrop-blur-xl backdrop-saturate-150 sm:p-6">
-          <RevealGroup className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((feature) => {
-            const tint = TINTS[feature.tint] ?? TINTS.blue;
+        <div className="mt-16 space-y-6">
+          <Reveal y={24}>
+            <WideCard feature={lead} />
+          </Reveal>
 
-            return (
-              <RevealItem key={feature.title}>
-                <article
-                  className={`card-edge mx-auto flex h-full w-full max-w-[520px] flex-col p-5 transition-colors duration-200 md:max-w-none ${tint.hover}`}>
-                  <span
-                    className={`grid size-10 place-items-center rounded-[8px] text-white ${tint.chip}`}>
-                    {ICONS[feature.icon] ?? ICONS.leads}
-                  </span>
-
-                  <h3 className="mt-4 text-[1.0625rem] font-bold tracking-tight text-ink">
-                    {feature.title}
-                  </h3>
-
-                  {/* The tile. Overflow hidden so the shot's corners stay
-                      clipped by the tile radius while it scales on hover. */}
-                  <div className={`mt-4 overflow-hidden rounded-[8px] p-3 ${tint.tile}`}>
-                    <Shot
-                      src={feature.shot}
-                      alt={feature.alt}
-                      ratio="16 / 10"
-                      position="left top"
-                      label={feature.title}
-                      className=""
-                    />
-                  </div>
-
-                  <p className="mt-4 text-[0.875rem] leading-relaxed text-ink-muted text-pretty">{feature.body}</p>
-                </article>
+          <RevealGroup className="grid gap-6 md:grid-cols-2">
+            {[wa, ig, bookings, hotel].map((f) => (
+              <RevealItem key={f.title} className="h-full">
+                <GridCard feature={f} />
               </RevealItem>
-            );
-          })}
+            ))}
           </RevealGroup>
+
+          <Reveal y={24}>
+            <WideCard feature={map} flip />
+          </Reveal>
         </div>
       </div>
     </section>
+  );
+}
+
+function Heading({ feature, large = false }: { feature: Feature; large?: boolean }) {
+  const look = LOOK[feature.icon];
+  return (
+    <>
+      <span className={`grid size-11 place-items-center rounded-[12px] ${look.chip}`}>{ICONS[feature.icon]}</span>
+      <h3
+        className={`font-display mt-5 font-semibold tracking-[-0.02em] text-ink ${
+          large ? 'text-[clamp(1.6rem,2.4vw,2rem)] leading-tight' : 'text-[1.375rem]'
+        }`}>
+        {feature.title}
+      </h3>
+      <p className="text-body-lg mt-2.5 max-w-[48ch] text-pretty text-ink-muted">{feature.body}</p>
+    </>
+  );
+}
+
+function ShotStage({ feature, className = '' }: { feature: Feature; className?: string }) {
+  return (
+    <div className={`rounded-[18px] bg-gradient-to-br p-4 sm:p-6 ${LOOK[feature.icon].stage} ${className}`}>
+      <Shot src={feature.shot} alt={feature.alt} w={feature.w} h={feature.h} className="w-full" />
+    </div>
+  );
+}
+
+function WideCard({ feature, flip = false }: { feature: Feature; flip?: boolean }) {
+  return (
+    <article className="card grid items-center gap-8 p-6 sm:p-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.35fr)] lg:gap-12 lg:p-10">
+      <div className={flip ? 'lg:order-2' : ''}>
+        <Heading feature={feature} large />
+      </div>
+      <ShotStage feature={feature} className={flip ? 'lg:order-1' : ''} />
+    </article>
+  );
+}
+
+function GridCard({ feature }: { feature: Feature }) {
+  return (
+    <article className="card flex h-full flex-col p-6 sm:p-8">
+      <Heading feature={feature} />
+      <ShotStage feature={feature} className="mt-7 flex w-full flex-1 items-center" />
+    </article>
   );
 }

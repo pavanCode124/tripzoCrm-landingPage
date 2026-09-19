@@ -1,24 +1,18 @@
 import Link from 'next/link';
 import type { ComponentProps, ReactNode } from 'react';
 
-type Variant = 'primary' | 'secondary' | 'dark' | 'onDark' | 'onDarkGhost';
+type Variant = 'primary' | 'secondary' | 'light' | 'glass';
 
 /**
  * Buttons.
  *
- * Rectangular with a slight radius, flat fills, and almost no hover movement.
- * That restraint IS the premium signal: a pill that lifts, glows and gains a
- * shadow on hover reads as a consumer app. A solid rectangle that darkens by a
- * few percent reads as software someone pays for.
- *
- * So: no translate, no scale, no shadow growth. Hover changes colour only, and
- * only slightly. The one thing kept is a focus ring, because that is
- * accessibility rather than decoration.
+ * Every pressable scales to 0.97 on :active, so the page confirms the click
+ * before the navigation does. Hover only changes colour and light, never
+ * position: a button that jumps away from the cursor feels unsure of itself.
  */
 const BASE =
-  'group inline-flex items-center justify-center gap-2 rounded-[10px] font-semibold ' +
-  'transition-colors duration-200 whitespace-nowrap ' +
-  'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand';
+  'btn-press group inline-flex items-center justify-center gap-2 rounded-[12px] font-semibold ' +
+  'whitespace-nowrap transition-[background-color,border-color,color,transform] duration-200 ease-out';
 
 const SIZES = {
   md: 'h-11 px-5 text-[0.9375rem]',
@@ -26,12 +20,10 @@ const SIZES = {
 } as const;
 
 const VARIANTS: Record<Variant, string> = {
-  // The one surface on the page with depth. See `btn-glass` in globals.css.
-  primary: 'btn-glass text-white',
-  secondary: 'border border-hairline-strong bg-canvas text-ink hover:bg-surface-2',
-  dark: 'bg-ink text-white hover:bg-dark-2',
-  onDark: 'bg-white text-ink hover:bg-brand-wash',
-  onDarkGhost: 'border border-white/25 bg-white/10 text-white hover:bg-white/20',
+  primary: 'btn-primary',
+  secondary: 'border border-line-strong bg-canvas text-ink shadow-[0_1px_2px_rgba(18,15,28,0.04)] hover:border-ink/20 hover:bg-canvas-2',
+  light: 'bg-white text-ink hover:bg-brand-wash',
+  glass: 'border border-white/30 bg-white/10 text-white backdrop-blur-md hover:bg-white/20',
 };
 
 export function Button({
@@ -49,19 +41,12 @@ export function Button({
   className?: string;
 } & Omit<ComponentProps<typeof Link>, 'href' | 'className' | 'children'>) {
   const classes = `${BASE} ${SIZES[size]} ${VARIANTS[variant]} ${className}`;
-  const external = href.startsWith('http');
-  const inPage = href.startsWith('#');
 
-  /**
-   * In-page anchors get a PLAIN <a>, never next/link.
-   *
-   * In the App Router a `<Link href="#workflow">` is treated as a client-side
-   * navigation: the router writes the hash into the URL and then applies its own
-   * scroll handling, which for a same-route navigation does nothing. The address
-   * bar changed and the page sat still. A native anchor has no such opinion — it
-   * honours `scroll-padding-top` and `scroll-behavior` from globals.css.
+  /*
+   * In-page anchors get a plain <a>, never next/link: the App Router treats a
+   * hash link as a client navigation, writes the URL and then does not scroll.
    */
-  if (inPage) {
+  if (href.startsWith('#')) {
     return (
       <a href={href} className={classes}>
         {children}
@@ -70,11 +55,7 @@ export function Button({
   }
 
   return (
-    <Link
-      href={href}
-      className={classes}
-      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      {...rest}>
+    <Link href={href} className={classes} {...rest}>
       {children}
     </Link>
   );

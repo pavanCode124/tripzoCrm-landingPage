@@ -1,5 +1,5 @@
 /**
- * The TripzoCRM mark — a globe inside an orbit ring, white on brand purple.
+ * The TripzoCRM mark : a globe inside an orbit ring, white on brand purple.
  *
  * Redrawn as SVG rather than shipped as a PNG: it is used at 34px in the header
  * and 40px in the footer, needs to stay crisp on every density, and an inline
@@ -13,7 +13,7 @@
 export function LogoMark({ size = 34, rounded = 11 }: { size?: number; rounded?: number }) {
   return (
     <span
-      className="relative grid shrink-0 place-items-center overflow-hidden bg-gradient-to-br from-brand-lift to-brand"
+      className="relative grid shrink-0 place-items-center overflow-hidden bg-gradient-to-br from-brand-lift to-brand shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_6px_16px_-6px_rgba(113,55,179,0.6)]"
       style={{ width: size, height: size, borderRadius: rounded }}>
       <svg
         width={size * 0.78}
@@ -54,38 +54,19 @@ export function LogoMark({ size = 34, rounded = 11 }: { size?: number; rounded?:
 }
 
 /**
- * Mark plus wordmark.
- *
- * "CRM" takes the green accent, matching the brand as it already appears on the
- * live site; the purple stays on the mark. Two colours in a four-syllable
- * wordmark is the limit — the strapline underneath is deliberately neutral.
+ * Mark plus wordmark. "CRM" takes the green, as on the live site; the purple
+ * stays on the mark.
  */
-export function Logo({
-  size = 34,
-  tone = 'light',
-  showStrapline = true,
-}: {
-  size?: number;
-  tone?: 'light' | 'dark';
-  showStrapline?: boolean;
-}) {
-  const onDark = tone === 'dark';
-
+export function Logo({ size = 34, showStrapline = true }: { size?: number; showStrapline?: boolean }) {
   return (
     <span className="flex items-center gap-2.5">
       <LogoMark size={size} />
       <span className="flex flex-col leading-none">
-        <span
-          className={`text-[1.3125rem] font-extrabold tracking-[-0.02em] ${
-            onDark ? 'text-chalk' : 'text-ink'
-          }`}>
+        <span className="font-display text-[1.3125rem] font-bold tracking-[-0.02em] text-ink">
           Tripzo<span className="text-accent">CRM</span>
         </span>
         {showStrapline ? (
-          <span
-            className={`mt-1 text-[0.625rem] font-semibold tracking-[0.19em] uppercase ${
-              onDark ? 'text-chalk-faint' : 'text-ink-faint'
-            }`}>
+          <span className="mt-1 text-[0.625rem] font-semibold tracking-[0.16em] text-ink-faint uppercase">
             Travel Agency Platform
           </span>
         ) : null}

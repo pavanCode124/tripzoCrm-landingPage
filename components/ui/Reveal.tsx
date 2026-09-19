@@ -4,27 +4,21 @@ import { motion, type Variants } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 /**
- * Scroll-reveal wrapper.
+ * Scroll reveal.
  *
- * One component rather than motion props scattered across every section, so the
- * whole page shares a single easing and distance and reads as one piece of
- * choreography instead of a dozen different opinions.
+ * One component so the page shares a single curve and distance. The curve is a
+ * strong ease-out: movement starts immediately, which is the moment the eye is
+ * watching, and settles slowly. A slight blur on the way in bridges the gap
+ * between "not there" and "there" so the fade reads as one object arriving.
  *
- * `once` is on deliberately: elements that re-animate every time they scroll
- * back into view feel restless on a long marketing page, and on a phone the
- * user passes each section several times while thumbing up and down.
- *
- * Motion is skipped entirely for anyone who asked the OS to reduce it — the CSS
- * in globals.css collapses transition durations, and `useReducedMotion` here
- * stops framer from setting the initial hidden state at all, which would
- * otherwise leave content invisible.
+ * `once`: sections that re-animate every time they pass feel restless.
  */
-const EASE = [0.21, 0.47, 0.32, 0.98] as const;
+export const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
 export function Reveal({
   children,
   delay = 0,
-  y = 22,
+  y = 18,
   className,
 }: {
   children: ReactNode;
@@ -33,11 +27,12 @@ export function Reveal({
   className?: string;
 }) {
   const variants: Variants = {
-    hidden: { opacity: 0, y },
+    hidden: { opacity: 0, y, filter: 'blur(6px)' },
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, delay, ease: EASE },
+      filter: 'blur(0px)',
+      transition: { duration: 0.8, delay, ease: EASE_OUT },
     },
   };
 
@@ -53,15 +48,11 @@ export function Reveal({
   );
 }
 
-/**
- * Staggered container — children reveal in sequence rather than together.
- * Used for the feature grid and the pricing row, where a single simultaneous
- * fade wastes the one chance the page has to direct the eye.
- */
+/** Staggered container: children reveal in sequence, 70ms apart. */
 export function RevealGroup({
   children,
   className,
-  stagger = 0.08,
+  stagger = 0.07,
 }: {
   children: ReactNode;
   className?: string;
@@ -85,7 +76,7 @@ export function RevealGroup({
 export function RevealItem({
   children,
   className,
-  y = 20,
+  y = 18,
 }: {
   children: ReactNode;
   className?: string;
@@ -95,8 +86,13 @@ export function RevealItem({
     <motion.div
       className={className}
       variants={{
-        hidden: { opacity: 0, y },
-        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+        hidden: { opacity: 0, y, filter: 'blur(6px)' },
+        show: {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          transition: { duration: 0.7, ease: EASE_OUT },
+        },
       }}>
       {children}
     </motion.div>

@@ -1,79 +1,48 @@
 @import 'tailwindcss';
 
 /* ---------------------------------------------------------------------------
-   Design tokens — LIGHT.
+   Design tokens. Light, premium.
 
-   White reads as more premium here than black did, and it is the right call for
-   this product: a CRM is a daytime work tool, the existing brand is already
-   light, and a white page lets the one accent (brand purple) actually land.
-
-   The page is not uniformly white, though. Two sections invert to near-black —
-   Workflow and the closing CTA — because a page with no tonal break reads flat
-   however good the type is. That contrast is where the "premium" comes from.
+   White ground, a lavender-grey second tone for alternating bands, and the
+   brand purple (#7137b3, from the web app's manifest) as the single accent.
+   Neutrals are nudged toward the brand hue so the greys and the purple read as
+   one family. Green is kept for what it means in the product: success, booked.
 --------------------------------------------------------------------------- */
 @theme {
-  /* Light ground */
   --color-canvas: #ffffff;
-  --color-canvas-2: #faf9fc;
-  --color-surface: #ffffff;
-  --color-surface-2: #f6f4fa;
-  --color-hairline: #e9e5f1;
-  --color-hairline-strong: #ddd7ea;
+  --color-canvas-2: #f8f7fc;
+  --color-canvas-3: #f2f0f8;
+  --color-line: #ebe8f2;
+  --color-line-strong: #dcd7e8;
 
-  /* Inverted sections */
-  --color-dark: #0d0a14;
-  --color-dark-2: #171026;
-  --color-dark-hairline: #2a2137;
+  --color-ink: #120f1c;
+  --color-ink-muted: #575170;
+  --color-ink-faint: #767089;
 
-  /* Text on light */
-  --color-ink: #14101f;
-  --color-ink-muted: #565067;
-  --color-ink-faint: #8b8499;
-  /* Body copy sitting ON a photograph. Darker than ink-muted because the ground
-     under it is a sunset, not white — measured at 4.42:1 with ink-muted, which
-     is under AA; this lands it at ~6.3:1 without washing the photo out further. */
-  --color-ink-photo: #35304a;
-
-  /* Text on dark */
-  --color-chalk: #f7f5fb;
-  --color-chalk-muted: #a79fba;
-  --color-chalk-faint: #736a88;
-
-  /* Brand */
   --color-brand: #7137b3;
-  --color-brand-lift: #9b5de5;
+  --color-brand-hover: #5f2c9a;
   --color-brand-deep: #3f1d6b;
-  --color-brand-wash: #f4eefc;
+  --color-brand-lift: #9b5de5;
+  --color-brand-soft: #e7dcf8;
+  --color-brand-wash: #f4effc;
 
-  /* Secondary accent — the green in the wordmark, carried through to the
-     "positive" states (ticks, live dots) so it reads as intentional. */
   --color-accent: #0ea672;
-  --color-accent-soft: #e8f8f1;
+  --color-accent-wash: #e7f7f0;
 
-  --color-wa: #25d366;
+  --color-night: #120c20;
+
+  --color-wa: #1fae5b;
   --color-ig: #e1306c;
 
-  --font-display: var(--font-instrument), ui-serif, Georgia, serif;
-  --font-sans: var(--font-sans-custom), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 
-  --radius-card: 12px;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* ---------------------------------------------------------------------------
-   Base
---------------------------------------------------------------------------- */
 html {
   scroll-behavior: smooth;
-  /*
-   * Anchor landing position.
-   *
-   * Exactly the height of the fixed header and nothing more. This used to be
-   * 96px AND every section also carried `scroll-mt-24` — scroll-padding on the
-   * scrollport and scroll-margin on the target ADD UP, so anchors landed 192px
-   * high and the bottom of the previous section stayed on screen. One offset,
-   * in one place, is the fix.
-   */
-  scroll-padding-top: 76px;
+  scroll-padding-top: 72px;
   background: var(--color-canvas);
 }
 
@@ -84,11 +53,18 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
+  caret-color: var(--color-brand);
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--color-brand) 22%, transparent);
+  background: var(--color-brand-soft);
   color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -105,202 +81,13 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   Utilities
+   Layout and type
 --------------------------------------------------------------------------- */
-
-@utility font-display {
-  font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-}
-
-@utility eyebrow {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-brand);
-}
-
-@utility gradient-text {
-  background: linear-gradient(100deg, var(--color-brand) 0%, #b57bf0 55%, var(--color-brand) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* The same trick on a dark section, lifted so it does not go muddy. */
-@utility gradient-text-dark {
-  background: linear-gradient(100deg, #b98bf5 0%, #e6d5ff 55%, #b98bf5 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/*
- * The card.
- *
- * On white, depth has to come from a soft shadow rather than a lighter fill —
- * there is nothing lighter than the page. Two shadows: a tight one that reads
- * as an edge, and a wide diffuse one that lifts the card off the ground.
- */
-@utility card-edge {
-  position: relative;
-  background: var(--color-surface);
-  border: 1px solid var(--color-hairline);
-  border-radius: var(--radius-card);
-  /* A tight, low shadow. A wide soft one makes a card hover above the page;
-     premium UI sits ON it. */
-  box-shadow: 0 1px 2px rgba(20, 16, 31, 0.05);
-}
-
-@utility card-edge-dark {
-  position: relative;
-  background: var(--color-dark-2);
-  border: 1px solid var(--color-dark-hairline);
-  border-radius: var(--radius-card);
-}
-
-@utility glow {
-  box-shadow:
-    0 1px 2px rgba(20, 16, 31, 0.05),
-    0 24px 70px -24px rgba(113, 55, 179, 0.35);
-}
-
-/* Grain, for the inverted sections only — on white it just looks like dirt. */
-@utility grain {
-  position: relative;
-}
-.grain::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.04;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/*
- * Hairlines that fade toward both ends.
- *
- * The stops are not evenly spaced on purpose. A plain
- * `transparent -> solid -> transparent` ramp spends most of its length almost
- * invisible and reads as a smudge; holding the line near full strength across
- * the middle third and falling away sharply after it gives a rule that looks
- * deliberate at the centre and genuinely vanishes at the edges. The extra stops
- * at 8% and 92% are what stop the tails ending abruptly.
- */
-@utility rule-fade {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    color-mix(in oklab, var(--color-hairline-strong) 18%, transparent) 8%,
-    color-mix(in oklab, var(--color-hairline-strong) 72%, transparent) 26%,
-    var(--color-hairline-strong) 50%,
-    color-mix(in oklab, var(--color-hairline-strong) 72%, transparent) 74%,
-    color-mix(in oklab, var(--color-hairline-strong) 18%, transparent) 92%,
-    transparent 100%
-  );
-}
-
-@utility rule-fade-dark {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    color-mix(in oklab, var(--color-dark-hairline) 18%, transparent) 8%,
-    color-mix(in oklab, var(--color-dark-hairline) 72%, transparent) 26%,
-    var(--color-dark-hairline) 50%,
-    color-mix(in oklab, var(--color-dark-hairline) 72%, transparent) 74%,
-    color-mix(in oklab, var(--color-dark-hairline) 18%, transparent) 92%,
-    transparent 100%
-  );
-}
-
-/* ---------------------------------------------------------------------------
-   Section dividers.
-
-   A 1px rule across the top of a section, strongest at the centre and gone by
-   the edges. Drawn as a pseudo-element rather than `border-top` because a
-   border cannot hold a gradient, and rather than a spacer <div> because an
-   empty element between every section is markup that means nothing.
-
-   Two variants, and both are needed: the dark bands (Workflow, Automations)
-   would swallow an ink-coloured hairline entirely, so they take a white one.
-   The divider always sits on the section BELOW the boundary, so each section
-   only has to know its own background.
-
-   `inset-x` is pulled in to the page gutter so the line starts and ends with
-   the content rather than running off into the viewport edge.
---------------------------------------------------------------------------- */
-@utility section-edge {
-  position: relative;
-}
-
-.section-edge::before,
-.section-edge-light::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  /* `left` + `width` rather than `left` + `right`: the pair form left the used
-     width unresolved in testing, and an explicit width cannot be ambiguous. */
-  left: 5%;
-  width: 90%;
-  height: 1px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.section-edge::before {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    color-mix(in oklab, var(--color-hairline-strong) 20%, transparent) 10%,
-    color-mix(in oklab, var(--color-hairline-strong) 85%, transparent) 30%,
-    var(--color-hairline-strong) 50%,
-    color-mix(in oklab, var(--color-hairline-strong) 85%, transparent) 70%,
-    color-mix(in oklab, var(--color-hairline-strong) 20%, transparent) 90%,
-    transparent 100%
-  );
-}
-
-@utility section-edge-light {
-  position: relative;
-}
-
-.section-edge-light::before {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.04) 10%,
-    rgba(255, 255, 255, 0.16) 30%,
-    rgba(255, 255, 255, 0.24) 50%,
-    rgba(255, 255, 255, 0.16) 70%,
-    rgba(255, 255, 255, 0.04) 90%,
-    transparent 100%
-  );
-}
-
-/*
- * Page gutter.
- *
- * 1480px rather than a more typical 1280: the card grids are three-up, so every
- * pixel here is divided by three and a narrow container makes the screenshots
- * inside those cards too small to read. At this width a feature card is ~450px
- * and its screenshot is legible at a glance, which is the entire point of
- * putting one there.
- *
- * Long-form text does NOT get wider with it — the headings, standfirsts and FAQ
- * carry their own max-widths (max-w-2xl / 3xl), because a 1400px line length is
- * unreadable no matter how much room is going spare.
- */
 @utility shell {
   width: 100%;
-  max-width: 1480px;
+  max-width: 1280px;
   margin-inline: auto;
-  padding-inline: 1.5rem;
+  padding-inline: 1.25rem;
 }
 
 @media (min-width: 1024px) {
@@ -309,47 +96,149 @@ body {
   }
 }
 
-/* ---------------------------------------------------------------------------
-   Fluid type scale.
+@utility font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
 
-   clamp() everywhere, so headings grow with the viewport instead of jumping at
-   two breakpoints. The middle term is the one that matters — it is vw-based, so
-   a 1440px laptop and a 390px phone both get a heading in proportion to the
-   column it sits in.
---------------------------------------------------------------------------- */
 @utility text-hero {
-  font-size: clamp(2.75rem, 6.2vw, 5.25rem);
-  line-height: 1.02;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.6rem, 5.6vw, 4.6rem);
+  line-height: 1.03;
+  letter-spacing: -0.038em;
 }
 
 @utility text-section {
-  font-size: clamp(2.125rem, 4.2vw, 3.5rem);
-  line-height: 1.06;
-  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 3.6vw, 3.1rem);
+  line-height: 1.07;
+  letter-spacing: -0.032em;
 }
 
 @utility text-lede {
-  font-size: clamp(1.0625rem, 1.35vw, 1.3125rem);
+  font-size: clamp(1.0625rem, 1.3vw, 1.2rem);
   line-height: 1.6;
 }
 
 @utility text-body-lg {
-  font-size: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  font-size: clamp(0.9375rem, 1.02vw, 1.03rem);
   line-height: 1.65;
 }
 
 /* ---------------------------------------------------------------------------
-   Keyframes
+   Surfaces
 --------------------------------------------------------------------------- */
-/*
- * Marquee.
- *
- * The track holds the card list TWICE, so translating it exactly -50% lands the
- * second copy precisely where the first started and the loop is invisible. Any
- * other distance, or an odd number of copies, produces a visible jump — which is
- * why the component duplicates rather than trying to be clever with counts.
- */
+
+/* A card on white: a hairline edge, and a shadow tinted toward the brand hue
+   rather than grey, so it lifts without looking dirty. */
+@utility card {
+  position: relative;
+  background: var(--color-canvas);
+  border: 1px solid var(--color-line);
+  border-radius: 20px;
+  box-shadow:
+    0 1px 2px rgb(18 15 28 / 0.04),
+    0 12px 32px -16px rgb(63 29 107 / 0.12);
+}
+
+@utility card-float {
+  position: relative;
+  background: var(--color-canvas);
+  border: 1px solid var(--color-line);
+  border-radius: 16px;
+  box-shadow:
+    0 1px 2px rgb(18 15 28 / 0.05),
+    0 24px 50px -20px rgb(63 29 107 / 0.28);
+}
+
+@utility btn-primary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+  background-color: var(--color-brand);
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.16), rgb(255 255 255 / 0));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.25),
+    0 1px 2px rgb(63 29 107 / 0.3),
+    0 8px 20px -8px rgb(113 55 179 / 0.6);
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    background-color: var(--color-brand-hover);
+  }
+}
+
+.btn-primary:active,
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* Section boundary: a hairline strongest at the centre, gone by the edges. */
+@utility section-edge {
+  position: relative;
+}
+
+.section-edge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 8%;
+  width: 84%;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--color-line-strong) 30%, var(--color-line-strong) 70%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Hero aurora and streams.
+--------------------------------------------------------------------------- */
+.aurora-blob {
+  border-radius: 9999px;
+  filter: blur(80px);
+  will-change: transform;
+}
+
+@keyframes aurora-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(var(--drift-x, 5%), var(--drift-y, 5%)) scale(1.08);
+  }
+}
+
+@keyframes stream-in {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+@keyframes stream-out {
+  to {
+    stroke-dashoffset: 40;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aurora-blob {
+    animation: aurora-drift 18s ease-in-out infinite;
+  }
+  .stream-flow {
+    animation: stream-in 3.2s linear infinite;
+  }
+  .stream-flow-out {
+    animation: stream-out 3.2s linear infinite;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Marquee. The track holds its list twice and moves exactly -50%.
+--------------------------------------------------------------------------- */
 @keyframes marquee-left {
   from {
     transform: translateX(0);
@@ -368,30 +257,6 @@ body {
   }
 }
 
-@keyframes float-slow {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes pulse-ring {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.6;
-  }
-  70% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 .animate-marquee-left {
   animation: marquee-left var(--marquee-duration, 60s) linear infinite;
 }
@@ -400,131 +265,49 @@ body {
   animation: marquee-right var(--marquee-duration, 60s) linear infinite;
 }
 
-/* Hovering a rail stops it, so a card that caught someone's eye can be read.
-   Applied on the wrapper, so the pointer does not have to chase a moving edge. */
 .marquee-hold:hover .animate-marquee-left,
 .marquee-hold:hover .animate-marquee-right {
   animation-play-state: paused;
 }
 
-/* Cards dissolve at both ends rather than being sliced by the viewport edge. */
 @utility marquee-mask {
-  mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    #000 7%,
-    #000 93%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    #000 7%,
-    #000 93%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
 }
 
-.animate-float-slow {
-  animation: float-slow 7s ease-in-out infinite;
-}
-.animate-pulse-ring {
-  animation: pulse-ring 2.4s ease-out infinite;
-}
-
-
-/* ---------------------------------------------------------------------------
-   Photographic section backgrounds.
-
-   A photo behind near-black body copy is unreadable without a scrim, and a flat
-   white overlay kills the photo. The treatment is three layers:
-
-     1. the image, slightly desaturated and blurred so it reads as atmosphere
-        rather than as a picture competing for attention;
-     2. a white wash heavy enough for AA contrast on the text above it;
-     3. a fade to solid canvas at the bottom edge, so the section dissolves into
-        the page instead of ending on a hard horizontal seam.
---------------------------------------------------------------------------- */
-@utility photo-bg {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-
-/* ---------------------------------------------------------------------------
-   The primary call to action.
-
-   Everything else on the page is flat by design; this one surface is not. It is
-   the single element the whole page is steering toward, so it gets the depth
-   nothing else does — and because nothing else has it, it reads as emphasis
-   rather than as decoration.
-
-   Four layers make it glass rather than "a purple button with a gradient":
-
-     1. a diagonal brand gradient — light top-left to deep bottom-right, so it
-        reads as a lit surface rather than a colour ramp;
-     2. a specular highlight across the top half (the ::before), which is the
-        actual glass cue — real glass catches light on its upper curve;
-     3. an inset hairline at the top edge, the lip of that curve;
-     4. a soft brand-coloured cast underneath, so it sits in the page rather
-        than on top of it.
-
-   Hover shifts the gradient and nothing else. No lift, no scale.
---------------------------------------------------------------------------- */
-@utility btn-glass {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  background-image: linear-gradient(135deg, #a06ce4 0%, var(--color-brand) 48%, #59299a 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.32),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.14),
-    0 1px 2px rgba(20, 16, 31, 0.18),
-    0 10px 24px -12px rgba(113, 55, 179, 0.55);
-  transition:
-    background-image 200ms ease,
-    box-shadow 200ms ease;
-}
-
-.btn-glass::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 45% 0;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0));
-  pointer-events: none;
-  z-index: -1;
-}
-
-.btn-glass:hover {
-  background-image: linear-gradient(135deg, #ac7cea 0%, #7b40bf 48%, #4d2286 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.38),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.16),
-    0 1px 2px rgba(20, 16, 31, 0.2),
-    0 12px 28px -12px rgba(113, 55, 179, 0.65);
-}
-
-
-/* ---------------------------------------------------------------------------
-   Short-viewport type scale.
-
-   The hero is one screen by contract, and the constraint that actually binds is
-   HEIGHT, not width. A 1366x768 laptop — still one of the most common screens
-   in use — leaves about 660px under the header, and the desktop scale overruns
-   it by a little. A width breakpoint cannot see this: 1366px wide is a large
-   screen by every horizontal measure.
-
-   So this keys off `max-height` instead, and only shrinks the two elements that
-   dominate the vertical budget. A 27-inch monitor at the same width is
-   untouched.
---------------------------------------------------------------------------- */
-@media (max-height: 820px) {
-  .text-hero {
-    font-size: clamp(2.25rem, 4.6vw, 3.75rem);
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
   }
-  .text-lede {
-    font-size: clamp(1rem, 1.15vw, 1.125rem);
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-float {
+    animation: float-y 6s ease-in-out infinite;
+  }
+  .animate-float-late {
+    animation: float-y 7s ease-in-out 1.2s infinite;
+  }
+}
+
+@keyframes ping-soft {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  80%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-ping-soft {
+    animation: ping-soft 1.8s var(--ease-out) infinite;
   }
 }

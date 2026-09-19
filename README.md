@@ -1,4 +1,4 @@
-# TripzoCRM — Landing Page
+# TripzoCRM landing page
 
 Marketing site for [TripzoCRM](https://www.tripzocrm.com), the travel agency
 operating system. Next.js 16 (App Router) + React 19 + Tailwind CSS v4.
@@ -15,37 +15,49 @@ npm run build        # static production build
 
 ## Design system
 
-Tokens are declared in `app/globals.css` under `@theme` — Tailwind v4 is
-CSS-first, so there is no `tailwind.config.js`.
+Tokens are declared in `app/globals.css` under `@theme` (Tailwind v4 is CSS-first).
 
-The page is **light**, with two deliberate inversions. A white page with no
-tonal break reads flat however good the type is; a page that inverts three times
-reads as stripes. Workflow (dark) and the closing CTA (purple) are the two.
+The page is **light**: white ground, a lavender-grey second tone (`canvas-2`)
+for alternating bands, and brand purple as the single accent.
 
 | Token | Value | Used for |
 | --- | --- | --- |
-| `canvas` / `canvas-2` | `#ffffff` / `#faf9fc` | Page, alternating sections |
-| `surface-2` | `#f6f4fa` | Inset panels inside cards |
-| `hairline` | `#e9e5f1` | Every 1px border |
-| `ink` / `ink-muted` / `ink-faint` | `#14101f` / `#565067` / `#8b8499` | Text on light |
-| `dark` / `dark-2` | `#0d0a14` / `#171026` | The two inverted sections |
-| `chalk` / `chalk-muted` | `#f7f5fb` / `#a79fba` | Text on dark |
-| `brand` / `brand-lift` | `#7137b3` / `#9b5de5` | Accent, gradients |
-| `brand-wash` | `#f4eefc` | Tinted chips and hover states |
-| `accent` | `#0ea672` | The green in the wordmark; ticks, live dots |
-| `wa` / `ig` | `#25d366` / `#e1306c` | Channel identity |
+| `canvas` / `canvas-2` / `canvas-3` | `#ffffff` / `#f8f7fc` / `#f2f0f8` | Page, bands, insets |
+| `line` / `line-strong` | `#ebe8f2` / `#dcd7e8` | Hairlines |
+| `ink` / `ink-muted` / `ink-faint` | `#120f1c` / `#575170` / `#767089` | Text |
+| `brand` / `brand-hover` / `brand-wash` | `#7137b3` / `#5f2c9a` / `#f4effc` | Accent, hover, tints |
+| `accent` | `#0ea672` | Success, booked, the "CRM" in the wordmark |
+| `wa` / `ig` | `#1fae5b` / `#e1306c` | Channel identity |
 
-**Type.** Instrument Serif carries headline accents and nothing else; Inter does
-all UI text. Both self-hosted by `next/font` — no render-blocking request, no
-layout shift.
+Pipeline stage colours live with the stage data in `lib/content.ts` (`FLOW`):
+`wash` and `ink` are the product's own chip colours from `STATUS_COLORS` in
+`tripzo-crm-mobile/src/lib/leads.ts`.
 
-Headings use fluid `clamp()` utilities (`text-hero`, `text-section`,
-`text-lede`, `text-body-lg`) so they scale with the viewport instead of jumping
-at two breakpoints. Change the scale in one place rather than per section.
+**Type.** Bricolage Grotesque for headings, Plus Jakarta Sans (the app's own UI
+face) for everything else. Both self-hosted by `next/font`.
 
-**Custom utilities** (also `globals.css`): `shell`, `card-edge`,
-`card-edge-dark`, `glow`, `grain`, `rule-fade`, `rule-fade-dark`,
-`gradient-text`, `gradient-text-dark`, `eyebrow`.
+**Screenshots** render through `components/ui/Shot.tsx`, which takes the file's
+natural `w`/`h` and never crops. When you replace a file in `public/shots`,
+update its `w`/`h` in `lib/content.ts`.
+
+**Hero.** Headline, CTAs and the four stats over a slow aurora of the brand
+colours (`.aurora-blob` in `globals.css`). Six product cards float in 3D around
+it (`components/ui/SignalCards.tsx`): inquiries on the left, outcomes on the
+right, with dashed streams flowing into the centre. Cards show from `xl` up.
+
+**Showcase.** The real dashboard in its own section under the hero, standing up
+from a tilt as it scrolls in.
+
+**Pipeline** (`components/sections/LeadFlow.tsx`). A normal-height section that
+scrolls like any other. While on screen it plays through the eight stages; a
+plane flies the route between stops and the lead card's status and activity log
+update. Clicking a stop, or prev/next, jumps there and pauses the tour.
+
+**Channels** are WhatsApp and Instagram only, with a note that both run on
+Meta's official WhatsApp Business Platform and Instagram Messaging API.
+
+**Motion** respects `prefers-reduced-motion` through
+`components/ui/useReducedMotionSafe.ts`, which avoids hydration mismatches.
 
 ## Structure
 
