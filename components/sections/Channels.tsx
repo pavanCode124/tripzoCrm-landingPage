@@ -116,7 +116,7 @@ export function Channels() {
                 exit={{ opacity: 0, scale: 0.99, filter: 'blur(4px)', transition: { duration: 0.15 } }}
                 transition={{ duration: 0.45, ease: EASE_OUT }}>
                 <div className="rounded-[14px] p-3 sm:p-5" style={{ background: `linear-gradient(135deg, ${look.color}14, #f8f7fc)` }}>
-                  <Shot src={channel.shot} alt={channel.alt} w={channel.w} h={channel.h} />
+                  <Shot src={channel.shot} alt={channel.alt} sizes="(min-width: 1280px) 700px, (min-width: 1024px) 55vw, 100vw" />
                 </div>
 
                 <ul className="grid gap-x-8 gap-y-4 px-2 pt-6 pb-3 sm:grid-cols-2">

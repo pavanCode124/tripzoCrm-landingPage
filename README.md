@@ -36,9 +36,8 @@ Pipeline stage colours live with the stage data in `lib/content.ts` (`FLOW`):
 **Type.** Bricolage Grotesque for headings, Plus Jakarta Sans (the app's own UI
 face) for everything else. Both self-hosted by `next/font`.
 
-**Screenshots** render through `components/ui/Shot.tsx`, which takes the file's
-natural `w`/`h` and never crops. When you replace a file in `public/shots`,
-update its `w`/`h` in `lib/content.ts`.
+**Screenshots** render through `components/ui/Shot.tsx` (next/image, never
+cropped). Sizes come from the static imports in `lib/images.ts`.
 
 **Hero.** Headline, CTAs and the four stats over a slow aurora of the brand
 colours (`.aurora-blob` in `globals.css`). Six product cards float in 3D around
@@ -101,15 +100,17 @@ number is positional: `1.png` is the showcase, and `2`–`7` are the six feature
 cards in the order they appear in `FEATURES`. Full table in
 `public/shots/README.md`; replace them with `npm run import-shots`.
 
-They render through `components/ui/Shot.tsx`, which crops to a fixed aspect from
-the top-left and shows a labelled placeholder for any file that is missing.
+**Images go through `next/image`.** Every file is a static import in
+`lib/images.ts`, which gives Next the intrinsic size (no layout shift) and a
+blurred placeholder. The optimiser serves AVIF, falling back to WebP, at the
+width each layout needs (`sizes` on every image). Screenshots use quality 85 so
+small UI text stays sharp; photos use 75. Both values are allowlisted in
+`next.config.mjs` (`images.qualities`, required since Next 16). Replacing a file
+in `public/shots` under the same name is all an update needs.
 
-`Shot` deliberately uses `<img>`, not `next/image`, and checks `naturalWidth` on
-mount rather than trusting `onError`: the markup is server-rendered, so a 404
-fires its error event before React hydrates and the handler never runs. That bug
-put raw alt text across every card. Switching to `next/image` later is a two-line
-change and buys AVIF/WebP conversion — worth doing, these files are ~100–330KB
-each.
+The two photos are stored as progressive JPEG (`Home_background.jpg`,
+`why_tripzo.jpg`), not PNG: 3.7MB of PNG became 520KB of source, and what the
+browser actually downloads is about 120KB of AVIF for both.
 
 **The mock-ups in `AppMock.tsx`, `Mobile.tsx` and `Reports.tsx` are DOM, not
 images.** Sharp at any density, weigh nothing, never go stale against the real

@@ -100,10 +100,10 @@ function Heading({ feature, large = false }: { feature: Feature; large?: boolean
   );
 }
 
-function ShotStage({ feature, className = '' }: { feature: Feature; className?: string }) {
+function ShotStage({ feature, sizes, className = '' }: { feature: Feature; sizes: string; className?: string }) {
   return (
     <div className={`rounded-[18px] bg-gradient-to-br p-4 sm:p-6 ${LOOK[feature.icon].stage} ${className}`}>
-      <Shot src={feature.shot} alt={feature.alt} w={feature.w} h={feature.h} className="w-full" />
+      <Shot src={feature.shot} alt={feature.alt} sizes={sizes} className="w-full" />
     </div>
   );
 }
@@ -114,7 +114,11 @@ function WideCard({ feature, flip = false }: { feature: Feature; flip?: boolean 
       <div className={flip ? 'lg:order-2' : ''}>
         <Heading feature={feature} large />
       </div>
-      <ShotStage feature={feature} className={flip ? 'lg:order-1' : ''} />
+      <ShotStage
+        feature={feature}
+        sizes="(min-width: 1280px) 680px, (min-width: 1024px) 55vw, 100vw"
+        className={flip ? 'lg:order-1' : ''}
+      />
     </article>
   );
 }
@@ -123,7 +127,11 @@ function GridCard({ feature }: { feature: Feature }) {
   return (
     <article className="card flex h-full flex-col p-6 sm:p-8">
       <Heading feature={feature} />
-      <ShotStage feature={feature} className="mt-7 flex w-full flex-1 items-center" />
+      <ShotStage
+        feature={feature}
+        sizes="(min-width: 1280px) 540px, (min-width: 768px) 45vw, 100vw"
+        className="mt-7 flex w-full flex-1 items-center"
+      />
     </article>
   );
 }

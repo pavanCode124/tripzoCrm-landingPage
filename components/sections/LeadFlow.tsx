@@ -9,6 +9,7 @@ import {
   useSpring,
   type MotionValue,
 } from 'framer-motion';
+import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 
 import {
@@ -29,6 +30,7 @@ import {
 import { EASE_OUT } from '@/components/ui/Reveal';
 import { useReducedMotionSafe } from '@/components/ui/useReducedMotionSafe';
 import { FLOW, type FlowStage } from '@/lib/content';
+import { IMAGES } from '@/lib/images';
 
 const STAGES = FLOW.stages;
 const N = STAGES.length;
@@ -430,11 +432,8 @@ function LeadCard({ index }: { index: number }) {
           WhatsApp
         </span>
         <span className="flex min-w-0 items-center gap-2 rounded-[8px] border border-line py-1 pr-2.5 pl-1">
-          {/* The package photo, taken straight from the real leads screenshot. */}
-          <span
-            className="size-6 shrink-0 rounded-[5px] bg-no-repeat"
-            style={{ backgroundImage: 'url(/shots/2.png)', backgroundSize: '1470px 703px', backgroundPosition: '-482px -430px' }}
-          />
+          {/* The package photo, cropped from the real leads screenshot. */}
+          <Image src={IMAGES.ladakhThumb} alt="" width={24} height={24} className="size-6 shrink-0 rounded-[5px] object-cover" />
           <span className="truncate text-[0.75rem] font-medium text-ink-muted">{FLOW.lead.package}</span>
         </span>
       </div>

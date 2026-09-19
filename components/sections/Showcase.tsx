@@ -52,7 +52,7 @@ export function Showcase() {
           <motion.div
             style={reduce ? undefined : { rotateX, scale, y, transformOrigin: '50% 100%' }}
             className="relative rounded-[24px] border border-white/80 bg-white/55 p-2 shadow-[0_2px_4px_rgba(18,15,28,0.04),0_60px_120px_-40px_rgba(63,29,107,0.5)] backdrop-blur-md sm:p-3">
-            <Shot src={HERO.shot} alt={HERO.alt} w={HERO.w} h={HERO.h} className="!shadow-none" />
+            <Shot src={HERO.shot} alt={HERO.alt} sizes="(min-width: 1140px) 1080px, 100vw" className="!shadow-none" />
           </motion.div>
         </div>
       </div>

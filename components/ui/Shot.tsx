@@ -1,48 +1,35 @@
-'use client';
-
-import { useEffect, useRef, useState } from 'react';
-
-import { PhotoIcon } from '@/components/ui/icons';
+import Image, { type StaticImageData } from 'next/image';
 
 /**
  * A product screenshot in a browser frame, shown whole.
  *
- * The box takes the image's own aspect ratio (`w` / `h`), so nothing is ever
- * cropped or stretched: what the reader sees is exactly what was exported.
- * Cropping to a fixed ratio is what cut the tables and inboxes off mid-row.
+ * next/image with a static import: the intrinsic size fixes the aspect ratio
+ * (nothing is cropped, nothing shifts while loading), a blurred placeholder
+ * fills the frame until the file arrives, and the optimiser serves AVIF or WebP
+ * at the width the layout actually needs, set by `sizes`.
  *
- * WHY THE MOUNT CHECK: the markup is server-rendered, so a 404 can fire its
- * error event before React hydrates and `onError` never runs. The effect
- * re-checks the node: finished loading with zero natural width means it failed.
+ * Quality 85 rather than the default 75: these are UI screenshots full of small
+ * text, and 75 softens it visibly. The photographs elsewhere stay at 75.
  */
 export function Shot({
   src,
   alt,
-  w,
-  h,
+  sizes,
   chrome = true,
   url = 'app.tripzocrm.com',
   className = '',
-  priority = false,
+  preload = false,
 }: {
-  src: string;
+  src: StaticImageData;
   alt: string;
-  /** Natural pixel size of the file, which sets the frame's aspect ratio. */
-  w: number;
-  h: number;
+  /** How wide the frame renders at each breakpoint, so the right file is picked. */
+  sizes: string;
   chrome?: boolean;
   url?: string;
   className?: string;
-  priority?: boolean;
+  /** Above-the-fold only: preload instead of lazy-loading. */
+  preload?: boolean;
 }) {
-  const ref = useRef<HTMLImageElement>(null);
-  const [failed, setFailed] = useState(false);
-
-  useEffect(() => {
-    const img = ref.current;
-    if (img && img.complete && img.naturalWidth === 0) setFailed(true);
-  }, [src]);
-
   return (
     <figure
       className={`overflow-hidden rounded-[14px] border border-line bg-white shadow-[0_1px_2px_rgba(18,15,28,0.05),0_18px_40px_-22px_rgba(63,29,107,0.35)] ${className}`}>
@@ -57,29 +44,15 @@ export function Shot({
         </div>
       ) : null}
 
-      <div className="relative" style={{ aspectRatio: `${w} / ${h}` }}>
-        {failed ? (
-          <div className="grid size-full place-items-center bg-canvas-2 text-center">
-            <div className="flex flex-col items-center gap-1.5">
-              <PhotoIcon className="size-5 text-ink-faint" />
-              <p className="text-[0.6875rem] font-semibold text-ink-faint">{src.split('/').pop()}</p>
-            </div>
-          </div>
-        ) : (
-          <img
-            ref={ref}
-            src={src}
-            alt={alt}
-            width={w}
-            height={h}
-            decoding="async"
-            loading={priority ? 'eager' : 'lazy'}
-            fetchPriority={priority ? 'high' : undefined}
-            onError={() => setFailed(true)}
-            className="block size-full object-contain"
-          />
-        )}
-      </div>
+      <Image
+        src={src}
+        alt={alt}
+        sizes={sizes}
+        quality={85}
+        placeholder="blur"
+        preload={preload}
+        className="block h-auto w-full"
+      />
     </figure>
   );
 }

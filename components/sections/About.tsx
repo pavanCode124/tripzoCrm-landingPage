@@ -1,7 +1,10 @@
+import Image from 'next/image';
+
 import { CheckIcon } from '@/components/ui/icons';
 import { RevealGroup, RevealItem } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ABOUT } from '@/lib/content';
+import { IMAGES } from '@/lib/images';
 
 /**
  * Why a travel-only CRM.
@@ -15,11 +18,13 @@ export function About() {
   return (
     <section id="about" className="relative isolate overflow-hidden py-28 sm:py-36">
       <div aria-hidden="true" className="absolute inset-0 -z-10">
-        <img
-          src="/shots/why_tripzo.png"
+        <Image
+          src={IMAGES.reef}
           alt=""
-          loading="lazy"
-          className="size-full object-cover object-[70%_40%]"
+          fill
+          sizes="100vw"
+          placeholder="blur"
+          className="object-cover object-[70%_40%]"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(250,249,253,0.97)_0%,rgba(250,249,253,0.92)_34%,rgba(250,249,253,0.45)_58%,rgba(250,249,253,0)_78%)] max-lg:bg-white/80" />
         <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-white to-transparent" />

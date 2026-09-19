@@ -1,7 +1,10 @@
+import Image from 'next/image';
+
 import { Button } from '@/components/ui/Button';
 import { ArrowRightIcon } from '@/components/ui/icons';
 import { Reveal } from '@/components/ui/Reveal';
 import { CTA, FINAL_CTA, SIGNUP_URL } from '@/lib/content';
+import { IMAGES } from '@/lib/images';
 
 /**
  * Closing call to action.
@@ -16,12 +19,13 @@ export function FinalCta() {
       <div className="mx-auto max-w-[1320px]">
         <div className="relative isolate overflow-hidden rounded-[28px] border border-white/12 px-6 py-20 shadow-[0_40px_90px_-60px_rgba(125,66,196,0.7)] sm:px-14 sm:py-28">
           <div aria-hidden="true" className="absolute inset-0 -z-10">
-            <img
-              src="/shots/Home_background.png"
+            <Image
+              src={IMAGES.sunset}
               alt=""
-              loading="lazy"
-              className="size-full object-cover"
-              style={{ objectPosition: 'center 40%' }}
+              fill
+              sizes="(min-width: 1320px) 1320px, 100vw"
+              placeholder="blur"
+              className="object-cover object-[center_40%]"
             />
             <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(26,12,48,0.94)_0%,rgba(63,29,107,0.82)_45%,rgba(113,55,179,0.35)_100%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_0%_100%,rgba(9,7,15,0.7),transparent_60%)]" />

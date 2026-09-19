@@ -6,6 +6,8 @@
  * import from here and render; none of them hardcode a sentence.
  */
 
+import { IMAGES } from '@/lib/images';
+
 export const APP_URL = 'https://www.tripzocrm.com';
 export const SIGNUP_URL = `${APP_URL}/login`;
 
@@ -37,9 +39,7 @@ export const HERO = {
   headlineAccent: 'into a booking.',
   sub: 'Leads, WhatsApp, Instagram, itineraries and invoices in one CRM built for travel agencies. No inquiry lost again.',
   secondaryCta: 'See the pipeline',
-  shot: '/shots/1.png',
-  w: 1891,
-  h: 864,
+  shot: IMAGES.dashboard,
   alt: 'The TripzoCRM admin dashboard: tasks due, new leads today, total leads, lead sources and the day’s pulse',
 };
 
@@ -169,54 +169,42 @@ export const FEATURES = [
   {
     icon: 'leads',
     title: 'Lead pipeline',
-    shot: '/shots/2.png',
-    w: 1470,
-    h: 703,
+    shot: IMAGES.leads,
     alt: 'The leads table with the pipeline stage rail across the top and per-lead quick actions',
     body: 'Capture every inquiry, assign it to an agent, and move it through stages with notes, tags and reminders.',
   },
   {
     icon: 'whatsapp',
     title: 'WhatsApp inbox',
-    shot: '/shots/3.png',
-    w: 1583,
-    h: 540,
+    shot: IMAGES.whatsapp,
     alt: 'The WhatsApp inbox: chat list, an open conversation, and a package carousel sent to the customer',
     body: 'Two-way WhatsApp Business chats attached to each lead, with bot flows for the first reply.',
   },
   {
     icon: 'instagram',
     title: 'Instagram DMs',
-    shot: '/shots/4.png',
-    w: 1536,
-    h: 502,
+    shot: IMAGES.instagram,
     alt: 'The Instagram inbox with an open DM thread showing a two-card package carousel',
     body: 'Reply to DMs inside the CRM and turn social conversations into qualified leads.',
   },
   {
     icon: 'map',
     title: 'Packages & itineraries',
-    shot: '/shots/5.png',
-    w: 1509,
-    h: 783,
+    shot: IMAGES.itinerary,
     alt: 'A rendered itinerary document showing a day-by-day timeline with photographs',
     body: 'Day-wise itineraries with hotels, sightseeing and pricing, shared as a public link.',
   },
   {
     icon: 'bookings',
     title: 'Bookings & invoices',
-    shot: '/shots/6.png',
-    w: 1292,
-    h: 868,
+    shot: IMAGES.invoice,
     alt: 'An invoice on the agency letterhead with billing details and line items',
     body: 'Convert a lead into a booking, raise the invoice and track payments on one timeline.',
   },
   {
     icon: 'hotel',
     title: 'Hotels & rates',
-    shot: '/shots/7.png',
-    w: 1481,
-    h: 675,
+    shot: IMAGES.hotels,
     alt: 'The property list beside a room-rates grid with single, double, triple and child rates',
     body: 'Your own properties with per-room rates, feeding straight into every quote you build.',
   },
@@ -235,9 +223,7 @@ export const CHANNELS = {
       key: 'whatsapp',
       name: 'WhatsApp',
       tagline: 'Where your customers already are',
-      shot: '/shots/3.png',
-      w: 1583,
-      h: 540,
+      shot: IMAGES.whatsapp,
       alt: 'The WhatsApp inbox inside TripzoCRM',
       points: [
         'Two-way Business API conversations, attached to the lead',
@@ -250,9 +236,7 @@ export const CHANNELS = {
       key: 'instagram',
       name: 'Instagram',
       tagline: 'Turn every reel into a lead',
-      shot: '/shots/4.png',
-      w: 1536,
-      h: 502,
+      shot: IMAGES.instagram,
       alt: 'An Instagram DM thread inside TripzoCRM',
       points: [
         'DM automations for every inbound inquiry',
