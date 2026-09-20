@@ -11,6 +11,10 @@ import { IMAGES } from '@/lib/images';
 export const APP_URL = 'https://www.tripzocrm.com';
 export const SIGNUP_URL = `${APP_URL}/login`;
 
+/** Store listings for the mobile app. Rendered as marks, never as raw URLs. */
+export const APP_STORE_URL = 'https://apps.apple.com/app/tripzocrm/id6811311679';
+export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.tripzo.crm';
+
 /** One label per intent, used everywhere on the page. */
 export const CTA = {
   signup: 'Start free',
@@ -299,6 +303,7 @@ export const MOBILE = {
     { title: 'Log expenses on the spot', body: 'At the hotel desk, before the receipt is lost.' },
     { title: 'Instant updates', body: 'Improvements arrive over the air. No store, no waiting.' },
   ],
+  storesLabel: 'Download the app',
 };
 
 export const ABOUT = {
@@ -438,4 +443,11 @@ export const FOOTER = {
       ],
     },
   ],
+  /** Required-ish attribution: the WhatsApp and Instagram inboxes run on Meta's
+   *  official business APIs, and the footer is where that belongs. */
+  techProvider: {
+    prefix: 'WhatsApp and Instagram messaging powered by',
+    name: 'Meta',
+    suffix: 'as technology provider.',
+  },
 };

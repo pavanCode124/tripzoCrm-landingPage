@@ -15,8 +15,13 @@ export {
   BellIcon,
   BuildingOffice2Icon,
   CalendarDaysIcon,
+  ChartBarIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  ClockIcon,
+  Cog6ToothIcon,
+  HomeIcon,
+  MagnifyingGlassIcon,
   DocumentTextIcon,
   MapIcon,
   PauseIcon,
@@ -33,4 +38,4 @@ export {
 
 export { CheckIcon, CheckCircleIcon, PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
-export { InstagramIcon, WebIcon, WhatsAppIcon } from '@/components/ui/BrandIcons';
+export { AppleIcon, GooglePlayIcon, InstagramIcon, MetaIcon, WebIcon, WhatsAppIcon } from '@/components/ui/BrandIcons';
