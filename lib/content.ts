@@ -448,6 +448,6 @@ export const FOOTER = {
   techProvider: {
     prefix: 'WhatsApp and Instagram messaging powered by',
     name: 'Meta',
-    suffix: 'as technology provider.',
+    suffix: 'as tech provider.',
   },
 };
