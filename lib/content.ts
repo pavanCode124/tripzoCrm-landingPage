@@ -437,8 +437,8 @@ export const FOOTER = {
     {
       title: 'Legal',
       links: [
-        { label: 'Privacy Policy', href: `${APP_URL}/privacy` },
-        { label: 'Terms of Service', href: `${APP_URL}/terms` },
+        { label: 'Privacy Policy', href: `${APP_URL}/privacy-policy` },
+        { label: 'Terms of Service', href: `${APP_URL}/terms-of-service` },
         { label: 'Data Deletion', href: `${APP_URL}/data-deletion` },
       ],
     },
