@@ -32,10 +32,6 @@ export function LegalPage({
             <dd className="mt-1 font-semibold text-ink tabular-nums">{LEGAL.effectiveDate}</dd>
           </div>
           <div>
-            <dt className="text-[0.6875rem] font-semibold tracking-[0.14em] text-ink-faint uppercase">Version</dt>
-            <dd className="mt-1 font-semibold text-ink tabular-nums">{LEGAL.version}</dd>
-          </div>
-          <div>
             <dt className="text-[0.6875rem] font-semibold tracking-[0.14em] text-ink-faint uppercase">Applies to</dt>
             <dd className="mt-1 font-semibold text-ink">Web CRM · Mobile app · Public agency pages</dd>
           </div>
@@ -54,7 +50,7 @@ export function LegalPage({
 
           <div className="flex flex-col gap-4 border-t border-line pt-8 text-[0.875rem] text-ink-faint sm:flex-row sm:items-center sm:justify-between">
             <p>
-              {title} · version {LEGAL.version}, effective {LEGAL.effectiveDate}
+              {title} · effective {LEGAL.effectiveDate}
             </p>
             <Link href={sibling.href} className="font-semibold text-brand hover:text-brand-hover">
               Read the {sibling.label} →

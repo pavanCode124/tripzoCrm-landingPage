@@ -13,7 +13,6 @@
 export const LEGAL = {
   /** Shown in the page header and the footer line of each document. */
   effectiveDate: '21 September 2026',
-  version: '2.1',
 
   entityName: '[Legal Entity Name]',
   cin: '[CIN]',
