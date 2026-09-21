@@ -311,3 +311,69 @@ body {
     animation: ping-soft 1.8s var(--ease-out) infinite;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Legal documents (/privacy-policy, /terms-of-service).
+
+   Plain elements inside a section's body pick up the reading rhythm here, so
+   the page files can be written as ordinary <p> and <ul> without a class on
+   every line.
+--------------------------------------------------------------------------- */
+.legal-prose,
+.legal-note {
+  font-size: 1.03rem;
+  line-height: 1.72;
+  color: var(--color-ink-muted);
+}
+
+.legal-prose > * + *,
+.legal-note > * + * {
+  margin-top: 1rem;
+}
+
+.legal-prose ul,
+.legal-note ul {
+  list-style: disc;
+  padding-left: 1.35rem;
+}
+
+.legal-prose li + li,
+.legal-note li + li {
+  margin-top: 0.5rem;
+}
+
+.legal-prose li::marker,
+.legal-note li::marker {
+  color: var(--color-line-strong);
+}
+
+.legal-prose strong,
+.legal-note strong {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.legal-prose em {
+  font-style: italic;
+}
+
+.legal-prose a,
+.legal-note a {
+  color: var(--color-brand);
+  text-decoration: underline;
+  text-decoration-color: var(--color-brand-soft);
+  text-underline-offset: 3px;
+}
+
+.legal-prose a:hover,
+.legal-note a:hover {
+  text-decoration-color: var(--color-brand);
+}
+
+.legal-prose code {
+  font-size: 0.88em;
+  padding: 0.1em 0.4em;
+  border-radius: 6px;
+  background: var(--color-canvas-3);
+  color: var(--color-brand-deep);
+}

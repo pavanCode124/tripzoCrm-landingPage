@@ -23,11 +23,11 @@ export const CTA = {
 };
 
 export const NAV_LINKS = [
-  { label: 'Pipeline', href: '#pipeline' },
-  { label: 'Features', href: '#features' },
-  { label: 'Channels', href: '#channels' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Pipeline', href: '/#pipeline' },
+  { label: 'Features', href: '/#features' },
+  { label: 'Channels', href: '/#channels' },
+  { label: 'Pricing', href: '/#pricing' },
+  { label: 'FAQ', href: '/#faq' },
 ];
 
 /** The product section under the hero: the dashboard, with its own heading. */
@@ -414,16 +414,31 @@ export const FINAL_CTA = {
   fineprint: 'Free for 14 days. No credit card.',
 };
 
+/**
+ * The menu on every page that is not the landing page: About, the legal
+ * documents, Contact. Those pages have none of the landing sections to jump
+ * to, so they offer the three places a visitor goes next instead. Pricing is
+ * the one that leads back, into the landing page's pricing section.
+ */
+export const SUBPAGE_LINKS = [
+  { label: 'About us', href: '/about' },
+  { label: 'Pricing', href: '/#pricing' },
+  { label: 'Contact us', href: '/contact' },
+];
+
+/** Replaces the footer's Product column on those same pages. */
+export const SUBPAGE_FOOTER_COLUMN = { title: 'TripzoCRM', links: SUBPAGE_LINKS };
+
 export const FOOTER = {
   blurb: 'The CRM for travel agencies: capture every inquiry, qualify every lead and close every booking in one place.',
   columns: [
     {
       title: 'Product',
       links: [
-        { label: 'Pipeline', href: '#pipeline' },
-        { label: 'Features', href: '#features' },
-        { label: 'Channels', href: '#channels' },
-        { label: 'Pricing', href: '#pricing' },
+        { label: 'Pipeline', href: '/#pipeline' },
+        { label: 'Features', href: '/#features' },
+        { label: 'Channels', href: '/#channels' },
+        { label: 'Pricing', href: '/#pricing' },
       ],
     },
     {
@@ -431,14 +446,14 @@ export const FOOTER = {
       links: [
         { label: CTA.signin, href: SIGNUP_URL },
         { label: CTA.demo, href: SIGNUP_URL },
-        { label: 'Contact', href: SIGNUP_URL },
+        { label: 'Contact', href: '/contact' },
       ],
     },
     {
       title: 'Legal',
       links: [
-        { label: 'Privacy Policy', href: `${APP_URL}/privacy-policy` },
-        { label: 'Terms of Service', href: `${APP_URL}/terms-of-service` },
+        { label: 'Privacy Policy', href: '/privacy-policy' },
+        { label: 'Terms of Service', href: '/terms-of-service' },
         { label: 'Data Deletion', href: `${APP_URL}/data-deletion` },
       ],
     },

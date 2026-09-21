@@ -72,7 +72,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${bricolage.variable}`}>
+    // data-scroll-behavior: the CSS makes in-page anchor jumps smooth; this tells
+    // Next.js to suspend that during page navigation, so a new page opens at
+    // its top instantly instead of gliding there (the Next 15 default, opt-in
+    // since 16).
+    <html lang="en" data-scroll-behavior="smooth" className={`${jakarta.variable} ${bricolage.variable}`}>
       <body>
         {children}
       </body>

@@ -34,8 +34,10 @@ import { Showcase } from '@/components/sections/Showcase';
  * slab), so the page never repeats a shape back to back more than twice.
  */
 export default function HomePage() {
+  // A plain wrapper first, not the fixed header: see SubPage for why Next.js
+  // would otherwise not scroll to the top when navigating here from a footer.
   return (
-    <>
+    <div>
       <Nav />
       <main>
         <Hero />
@@ -52,6 +54,6 @@ export default function HomePage() {
         <FinalCta />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

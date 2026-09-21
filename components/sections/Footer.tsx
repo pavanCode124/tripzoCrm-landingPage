@@ -5,8 +5,16 @@ import { Logo } from '@/components/ui/Logo';
 import { StoreBadges } from '@/components/ui/StoreBadges';
 import { FOOTER, MOBILE } from '@/lib/content';
 
-export function Footer() {
+/**
+ * `primaryColumn` replaces the first column (Product). Pages other than the
+ * landing page pass SUBPAGE_FOOTER_COLUMN, since Product only links to landing
+ * sections.
+ */
+export function Footer({
+  primaryColumn,
+}: { primaryColumn?: (typeof FOOTER.columns)[number] } = {}) {
   const year = new Date().getFullYear();
+  const columns = primaryColumn ? [primaryColumn, ...FOOTER.columns.slice(1)] : FOOTER.columns;
 
   return (
     <footer className="section-edge bg-canvas-2">
@@ -23,16 +31,17 @@ export function Footer() {
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-            {FOOTER.columns.map((column) => (
+            {columns.map((column) => (
               <div key={column.title}>
                 <h3 className="text-[0.875rem] font-semibold text-ink">{column.title}</h3>
                 <ul className="mt-4 space-y-3">
                   {column.links.map((link) => {
                     const style = 'text-[0.9375rem] text-ink-muted transition-colors hover:text-ink';
-                    // In-page hashes need a plain <a>; next/link would not scroll.
+                    // Section links ("/#faq") need a plain <a>: next/link would not scroll to
+                    // the hash on the home page, and the legal pages link back to it.
                     return (
                       <li key={link.label}>
-                        {link.href.startsWith('#') ? (
+                        {link.href.includes('#') ? (
                           <a href={link.href} className={style}>
                             {link.label}
                           </a>
