@@ -134,7 +134,7 @@ export function Nav({ links = NAV_LINKS }: { links?: { label: string; href: stri
 
 /**
  * A section link ("/#faq") stays a plain <a>, because next/link does not scroll
- * to a hash on the page it is already on. A page link ("/about") goes through
+ * to a hash on the page it is already on. A page link ("/contact") goes through
  * next/link so it navigates without a full reload.
  */
 function MenuLink({

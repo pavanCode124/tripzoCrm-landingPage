@@ -5,10 +5,10 @@ import { Nav } from '@/components/sections/Nav';
 import { SUBPAGE_FOOTER_COLUMN, SUBPAGE_LINKS } from '@/lib/content';
 
 /**
- * The frame for every page that is not the landing page: About, Contact and the
- * two legal documents. The same header and footer as the landing page, with the
- * menu swapped for About / Pricing / Contact, since these pages have no landing
- * sections of their own to jump between.
+ * The frame for every page that is not the landing page: Contact and the two
+ * legal documents. The same header and footer as the landing page, with the
+ * menu swapped for About us / Pricing / Contact, since these pages have no
+ * landing sections of their own to jump between.
  */
 export function SubPage({ children }: { children: ReactNode }) {
   // The wrapper is load-bearing. On navigation Next.js scrolls the new page's

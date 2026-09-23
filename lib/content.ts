@@ -415,13 +415,13 @@ export const FINAL_CTA = {
 };
 
 /**
- * The menu on every page that is not the landing page: About, the legal
- * documents, Contact. Those pages have none of the landing sections to jump
- * to, so they offer the three places a visitor goes next instead. Pricing is
- * the one that leads back, into the landing page's pricing section.
+ * The menu on every page that is not the landing page: the legal documents and
+ * Contact. Those pages have none of the landing sections to jump to, so they
+ * offer the three places a visitor goes next instead. About us leads back to
+ * the top of the landing page, and Pricing to its pricing section.
  */
 export const SUBPAGE_LINKS = [
-  { label: 'About us', href: '/about' },
+  { label: 'About us', href: '/' },
   { label: 'Pricing', href: '/#pricing' },
   { label: 'Contact us', href: '/contact' },
 ];
