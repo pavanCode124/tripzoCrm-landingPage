@@ -52,7 +52,6 @@ export function FinalCta() {
                   {CTA.demo}
                 </Button>
               </div>
-              <p className="mt-6 text-[0.875rem] text-white/65">{FINAL_CTA.fineprint}</p>
             </Reveal>
           </div>
         </div>

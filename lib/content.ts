@@ -17,7 +17,7 @@ export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com
 
 /** One label per intent, used everywhere on the page. */
 export const CTA = {
-  signup: 'Start free',
+  signup: 'Start',
   demo: 'Book a demo',
   signin: 'Sign in',
 };
@@ -308,7 +308,7 @@ export const MOBILE = {
 
 export const ABOUT = {
   title: 'Built for travel,',
-  accent: 'not bent into shape.',
+  accent: 'not adapted from sales software.',
   body: 'Every feature, from WhatsApp threads to day-wise itineraries to trip-level profit, exists because a real agency asked for it.',
   pillars: [
     {
@@ -411,7 +411,6 @@ export const FINAL_CTA = {
   title: 'Stop losing bookings',
   titleAccent: 'to unread messages.',
   sub: 'Set TripzoCRM up in an afternoon and watch the next inquiry land where you can act on it.',
-  fineprint: 'Free for 14 days. No credit card.',
 };
 
 /**
@@ -454,7 +453,7 @@ export const FOOTER = {
       links: [
         { label: 'Privacy Policy', href: '/privacy-policy' },
         { label: 'Terms of Service', href: '/terms-of-service' },
-        { label: 'Data Deletion', href: `${APP_URL}/data-deletion` },
+        { label: 'Data Deletion', href: '/data-deletion' },
       ],
     },
   ],
