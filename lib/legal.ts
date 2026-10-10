@@ -10,18 +10,7 @@ export const LEGAL = {
   /** Shown in the page header and the footer line of each legal document. */
   effectiveDate: '22 September 2026',
 
-  /** About and Contact pages only. */
-  entityName: '[Legal Entity Name]',
-  registeredAddress: '[Registered Office Address]',
-
   supportEmail: 'support@tripzocrm.com',
-
-  /** Contact page only. */
-  grievanceOfficer: {
-    name: '[Grievance Officer name]',
-    email: '[Grievance email]',
-    phone: '[Grievance phone]',
-  },
 } as const;
 
 /** True while a value is still an unfilled placeholder. */

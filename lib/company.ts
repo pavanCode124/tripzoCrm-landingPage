@@ -11,15 +11,13 @@
  */
 
 export const CONTACT = {
-  salesEmail: '[Sales email]',
-  salesPhone: '[Sales phone, e.g. +91 98765 43210]',
+  salesEmail: 'support@tripzocrm.com',
+  salesPhone: '+91 63637 74150',
+  /** Shown next to the WhatsApp icon. */
+  whatsappDisplay: '+91 63637 74150',
   /** Digits only, with country code and no "+", e.g. 919876543210. Builds the wa.me link. */
-  whatsappNumber: '[WhatsApp number, digits only, e.g. 919876543210]',
-  supportPhone: '[Support phone]',
+  whatsappNumber: '916363774150',
+  supportPhone: '+91 63637 74150',
   /** Shown under Support. */
-  hours: '[Business hours, e.g. Mon–Sat, 10:00–19:00 IST]',
-  /** Where visitors can meet you. May differ from the registered office. */
-  officeAddress: '[Office address]',
-  /** A Google Maps share link for the office. */
-  mapUrl: '[Google Maps link]',
+  days: 'Mon–Sat',
 };

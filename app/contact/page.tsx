@@ -7,10 +7,8 @@ import { PageHeader, SubPage } from '@/components/page/SubPage';
 import { Button } from '@/components/ui/Button';
 import {
   ArrowRightIcon,
-  ClockIcon,
+  CalendarDaysIcon,
   EnvelopeIcon,
-  MapIcon,
-  MapPinIcon,
   PhoneIcon,
   ShieldCheckIcon,
   WhatsAppIcon,
@@ -75,13 +73,13 @@ export default function ContactPage() {
 
       <section className="py-16 sm:py-24">
         <div className="shell">
-          <RevealGroup className="grid gap-5 lg:grid-cols-3">
+          <RevealGroup className="grid gap-5 lg:grid-cols-2">
             <RevealItem>
               <Card title="Sales and demos" sub="See TripzoCRM on your own enquiries, or talk through plans for your team.">
                 <ul className="space-y-5">
                   <Line icon={<EnvelopeIcon className="size-[18px]" />} label="Email" value={CONTACT.salesEmail} href={`mailto:${CONTACT.salesEmail}`} />
                   <Line icon={<PhoneIcon className="size-[18px]" />} label="Phone" value={CONTACT.salesPhone} href={telHref(CONTACT.salesPhone)} />
-                  <Line icon={<WhatsAppIcon size={18} />} label="WhatsApp" value={CONTACT.whatsappNumber} href={`https://wa.me/${CONTACT.whatsappNumber}`} />
+                  <Line icon={<WhatsAppIcon size={18} />} label="WhatsApp" value={CONTACT.whatsappDisplay} href={`https://wa.me/${CONTACT.whatsappNumber}`} />
                 </ul>
                 <div className="mt-auto pt-7">
                   <Button href={SIGNUP_URL} size="md">
@@ -97,16 +95,7 @@ export default function ContactPage() {
                 <ul className="space-y-5">
                   <Line icon={<EnvelopeIcon className="size-[18px]" />} label="Email" value={LEGAL.supportEmail} href={`mailto:${LEGAL.supportEmail}`} />
                   <Line icon={<PhoneIcon className="size-[18px]" />} label="Phone" value={CONTACT.supportPhone} href={telHref(CONTACT.supportPhone)} />
-                  <Line icon={<ClockIcon className="size-[18px]" />} label="Hours" value={CONTACT.hours} />
-                </ul>
-              </Card>
-            </RevealItem>
-
-            <RevealItem>
-              <Card title="Office" sub="Where to find us.">
-                <ul className="space-y-5">
-                  <Line icon={<MapPinIcon className="size-[18px]" />} label="Address" value={CONTACT.officeAddress} />
-                  <Line icon={<MapIcon className="size-[18px]" />} label="Map" value={CONTACT.mapUrl} href={CONTACT.mapUrl} />
+                  <Line icon={<CalendarDaysIcon className="size-[18px]" />} label="Days" value={CONTACT.days} />
                 </ul>
               </Card>
             </RevealItem>
@@ -121,18 +110,11 @@ export default function ContactPage() {
                 <div>
                   <h2 className="font-display text-[1.25rem] font-semibold text-ink">Privacy, legal and grievances</h2>
                   <p className="text-body-lg mt-1 text-pretty text-ink-muted">
-                    For a data request or a complaint about how personal data is handled, write to our Grievance Officer at{' '}
-                    {isPlaceholder(LEGAL.grievanceOfficer.email) ? (
-                      <Fill>{LEGAL.grievanceOfficer.email}</Fill>
-                    ) : (
-                      <a href={`mailto:${LEGAL.grievanceOfficer.email}`} className="font-semibold text-brand hover:text-brand-hover">
-                        {LEGAL.grievanceOfficer.email}
-                      </a>
-                    )}
+                    For a data request or a complaint about how personal data is handled, write to us at{' '}
+                    <a href={`mailto:${LEGAL.supportEmail}`} className="font-semibold text-brand hover:text-brand-hover">
+                      {LEGAL.supportEmail}
+                    </a>
                     . Travellers should first contact the agency they booked with.
-                  </p>
-                  <p className="mt-2 text-[0.875rem] text-ink-faint">
-                    <Fill>{LEGAL.entityName}</Fill> · <Fill>{LEGAL.registeredAddress}</Fill>
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-x-5 gap-y-2 text-[0.9375rem] font-semibold">
