@@ -96,7 +96,7 @@ export function GooglePlayIcon({ size = 20, ...rest }: IconProps) {
   );
 }
 
-/** Meta's infinity mark, credited in the footer as the messaging tech provider. */
+/** Meta's infinity mark, credited in the footer as the messaging tech partner. */
 export function MetaIcon({ size = 20, ...rest }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...rest}>
