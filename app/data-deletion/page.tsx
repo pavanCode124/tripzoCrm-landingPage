@@ -44,7 +44,7 @@ export default function DataDeletionPage() {
           </p>
           <p>
             <strong>2. Verification.</strong> We confirm your identity and your authority over the account. This
-            usually takes 24&ndash;48 hours.
+            normally takes one to two working days.
           </p>
           <p>
             <strong>3. Permanent removal.</strong> Once verified, we purge your records &mdash; including customer
@@ -139,8 +139,8 @@ export default function DataDeletionPage() {
         <H3>Step 2 — Verification</H3>
         <p>
           Our team verifies your identity and your authority over the account before we touch any data. This protects
-          your company&rsquo;s records from being erased by someone who is not entitled to ask. It usually takes
-          24&ndash;48 hours. See section 5.
+          your company&rsquo;s records from being erased by someone who is not entitled to ask. It normally takes one
+          to two working days. See section 5.
         </p>
 
         <H3>Step 3 — Permanent removal</H3>
@@ -243,6 +243,14 @@ export default function DataDeletionPage() {
               <>Security, fraud prevention and service integrity</>,
               <>Deleted on their normal rotation</>,
             ],
+            [
+              <>
+                <b>Encrypted backups</b>
+                <Sub>Disaster-recovery copies of the database, taken before your deletion ran</Sub>
+              </>,
+              <>Resilience against data loss or a system failure</>,
+              <>Rotated on their own schedule; gone within 90 days</>,
+            ],
           ]}
         />
       </Section>
@@ -266,18 +274,15 @@ export default function DataDeletionPage() {
       </Section>
 
       <Section id="timeline" n={9} title="How long it takes">
-        <ul>
-          <li>
-            <strong>Acknowledgement</strong> &mdash; we reply to confirm we received your request, normally within one
-            working day.
-          </li>
-          <li>
-            <strong>Verification</strong> &mdash; usually 24&ndash;48 hours.
-          </li>
-          <li>
-            <strong>Deletion</strong> &mdash; within 30 days of verification, and usually much sooner.
-          </li>
-        </ul>
+        <p>
+          Verification normally takes one to two working days. Erasure from live systems follows immediately after,
+          and within 30 days of the request in every case. Encrypted backups are rotated on their own schedule and the
+          data is gone from them within 90 days.
+        </p>
+        <p>
+          If a WhatsApp or Instagram number was connected to the account, the connection is severed at the same time
+          and no further messages reach us.
+        </p>
         <p>
           If a request will take longer than 30 days, we will tell you why and when to expect it, as data-protection
           law requires.
